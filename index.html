@@ -34,7 +34,6 @@
   </script>
 
   <style>
-    /* Custom styling for ranges, scrollbars, and modals */
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: #f8fafc; }
     ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
@@ -106,11 +105,11 @@
 
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full flex-1">
     
-    <!-- Hero / Registration quick notice -->
+    <!-- Hero notice -->
     <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-3 bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs">
       <div>
         <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">Compare Real-Time Motor Insurance Plans</h1>
-        <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Select vehicle specifications and add-ons below. Choose a policy to proceed directly to the insurer's checkout.</p>
+        <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Select from all major Indian car models. Click Buy to proceed directly to the official insurer portal.</p>
       </div>
       <div class="flex items-center gap-2 bg-blue-50 border border-blue-200 text-blue-900 px-3 py-1.5 rounded-xl text-xs font-medium self-start md:self-auto">
         <svg class="w-4 h-4 text-brand-600 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
@@ -118,10 +117,10 @@
       </div>
     </div>
 
-    <!-- 2 Column Master Layout: Specifications & Riders (5 Cols) vs Real-Time Quotes Feed (7 Cols) -->
+    <!-- 2 Column Master Layout -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
       
-      <!-- LEFT COLUMN (5 Columns) -->
+      <!-- LEFT COLUMN -->
       <div class="lg:col-span-5 space-y-5">
         
         <!-- SECTION 1: Vehicle & RTO Identity -->
@@ -134,29 +133,10 @@
             <span id="vehicle-type-label" class="text-[11px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md font-semibold">Private Car</span>
           </div>
 
-          <!-- Vehicle Category Tabs -->
-          <div>
-            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Vehicle Category</label>
-            <div class="grid grid-cols-3 gap-2 p-1 bg-slate-100 rounded-xl">
-              <button type="button" onclick="setVehicleCategory('car')" id="cat-car-btn" class="cat-btn py-2 text-xs font-bold rounded-lg transition-all shadow-xs bg-white text-brand-700 flex items-center justify-center gap-1.5">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9L2 12v4c0 .6.4 1 1 1h2m14 0a2 2 0 100 4 2 2 0 000-4zm-12 0a2 2 0 100 4 2 2 0 000-4z"/></svg>
-                Car
-              </button>
-              <button type="button" onclick="setVehicleCategory('bike')" id="cat-bike-btn" class="cat-btn py-2 text-xs font-medium rounded-lg transition-all text-slate-600 hover:text-slate-900 flex items-center justify-center gap-1.5">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                Two-Wheeler
-              </button>
-              <button type="button" onclick="setVehicleCategory('commercial')" id="cat-commercial-btn" class="cat-btn py-2 text-xs font-medium rounded-lg transition-all text-slate-600 hover:text-slate-900 flex items-center justify-center gap-1.5">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
-                Commercial
-              </button>
-            </div>
-          </div>
-
           <!-- Registration Number with Auto-RTO Parser -->
           <div>
             <div class="flex items-center justify-between mb-1">
-              <label for="reg-number-input" class="text-xs font-semibold text-slate-700">Vehicle Registration Number</label>
+              <label for="reg-number-input" class="text-xs font-semibold text-slate-700">Registration Number</label>
               <span id="rto-detected-tag" class="text-[10px] font-mono font-bold text-brand-700 bg-brand-50 border border-brand-200 px-2 py-0.5 rounded">RTO: UP-14 (Ghaziabad)</span>
             </div>
             <div class="relative">
@@ -173,10 +153,9 @@
                 placeholder="e.g. DL01AB1234, MH02CD9999"
               >
             </div>
-            <p class="text-[10px] text-slate-400 mt-1">Entering your state and RTO series automatically determines your city zone.</p>
           </div>
 
-          <!-- Make & Model Selectors -->
+          <!-- Comprehensive Indian Car Makes & Models -->
           <div class="grid grid-cols-2 gap-3">
             <div>
               <label for="vehicle-make" class="block text-xs font-semibold text-slate-600 mb-1">Make / Brand</label>
@@ -262,8 +241,8 @@
             <input 
               type="range" 
               id="idv-slider" 
-              min="300000" 
-              max="1500000" 
+              min="100000" 
+              max="5000000" 
               step="5000" 
               value="720000" 
               oninput="onIdvChange(this.value)" 
@@ -302,7 +281,7 @@
                 <span class="w-2 h-3.5 bg-emerald-600 rounded-xs inline-block"></span>
                 3. Add-on Protection Riders
               </h2>
-              <p class="text-[10px] text-slate-400 mt-0.5">Customize claim payouts without unexpected deductions</p>
+              <p class="text-[10px] text-slate-400 mt-0.5">Select specific protections for your policy</p>
             </div>
             <button type="button" onclick="toggleSelectAllAddons()" class="text-xs text-brand-600 font-semibold hover:underline">Select All</button>
           </div>
@@ -314,7 +293,7 @@
               <div class="flex-1 text-xs">
                 <div class="flex items-center justify-between">
                   <span class="font-bold text-slate-800">Zero Depreciation (Bumper to Bumper)</span>
-                  <span class="font-mono text-slate-700 font-semibold text-[11px]">+ ~₹2,400</span>
+                  <span class="font-mono text-slate-700 font-semibold text-[11px]">+ ~0.4% IDV</span>
                 </div>
                 <p class="text-slate-500 text-[10px] mt-0.5">Full claim value for plastic, fiber, metal & glass without age depreciation.</p>
               </div>
@@ -328,7 +307,7 @@
                   <span class="font-bold text-slate-800">Engine & Gearbox Protection</span>
                   <span class="font-mono text-slate-700 font-semibold text-[11px]">+ ~₹820</span>
                 </div>
-                <p class="text-slate-500 text-[10px] mt-0.5">Covers hydrostatic lock and oil seepage repair during floods and monsoon driving.</p>
+                <p class="text-slate-500 text-[10px] mt-0.5">Covers hydrostatic lock and oil seepage repair during water-logging and floods.</p>
               </div>
             </label>
 
@@ -340,7 +319,7 @@
                   <span class="font-bold text-slate-800">24x7 Roadside Assistance (RSA)</span>
                   <span class="font-mono text-slate-700 font-semibold text-[11px]">+ ~₹299</span>
                 </div>
-                <p class="text-slate-500 text-[10px] mt-0.5">Emergency towing, battery jumpstart, fuel assistance, and puncture repair across India.</p>
+                <p class="text-slate-500 text-[10px] mt-0.5">Emergency towing, battery jumpstart, fuel assistance, and puncture repair.</p>
               </div>
             </label>
 
@@ -350,9 +329,9 @@
               <div class="flex-1 text-xs">
                 <div class="flex items-center justify-between">
                   <span class="font-bold text-slate-800">Return to Invoice (RTI)</span>
-                  <span class="font-mono text-slate-700 font-semibold text-[11px]">+ ~₹1,500</span>
+                  <span class="font-mono text-slate-700 font-semibold text-[11px]">+ ~0.28% IDV</span>
                 </div>
-                <p class="text-slate-500 text-[10px] mt-0.5">In case of theft or total loss, claim original on-road purchase price including road tax.</p>
+                <p class="text-slate-500 text-[10px] mt-0.5">In case of theft or total loss, claim original on-road invoice purchase price.</p>
               </div>
             </label>
 
@@ -364,7 +343,7 @@
                   <span class="font-bold text-slate-800">Consumables Expenses</span>
                   <span class="font-mono text-slate-700 font-semibold text-[11px]">+ ~₹420</span>
                 </div>
-                <p class="text-slate-500 text-[10px] mt-0.5">Includes cost of engine oil, nuts, bolts, bearings, coolants and AC refrigerant gas.</p>
+                <p class="text-slate-500 text-[10px] mt-0.5">Engine oil, nuts, bolts, bearings, coolants and AC refrigerant gas reimbursement.</p>
               </div>
             </label>
 
@@ -376,7 +355,7 @@
                   <span class="font-bold text-slate-800">Key Replacement & Locksmith</span>
                   <span class="font-mono text-slate-700 font-semibold text-[11px]">+ ~₹250</span>
                 </div>
-                <p class="text-slate-500 text-[10px] mt-0.5">Reimburses electronic key fobs and lock assembly replacement costs if keys are lost.</p>
+                <p class="text-slate-500 text-[10px] mt-0.5">Reimburses smart key fob and lock tumbler replacement costs if lost or stolen.</p>
               </div>
             </label>
 
@@ -388,7 +367,7 @@
                   <span class="font-bold text-amber-900">Compulsory Personal Accident (₹15 Lakh)</span>
                   <span class="font-mono text-amber-900 font-semibold text-[11px]">₹330</span>
                 </div>
-                <p class="text-amber-800/80 text-[10px] mt-0.5">Mandatory by law for owner-drivers unless you have standalone ₹15L accidental cover.</p>
+                <p class="text-amber-800/80 text-[10px] mt-0.5">Mandatory statutory cover for owner-drivers unless you hold existing ₹15L PA cover.</p>
               </div>
             </label>
           </div>
@@ -396,7 +375,7 @@
 
       </div>
 
-      <!-- RIGHT COLUMN: Insurer Cards Feed & Direct Outbound Actions (7 Columns) -->
+      <!-- RIGHT COLUMN: Quotes & Direct Actions -->
       <div class="lg:col-span-7 space-y-4">
         
         <!-- Filter, Count & Sort Bar -->
@@ -431,7 +410,7 @@
             Transparent Redirection Policy
           </div>
           <p class="text-xs text-slate-300 leading-relaxed">
-            When clicking <b class="text-white">"Buy on [Company] ↗"</b>, you will be seamlessly redirected to the insurer's official secure portal with your registration number and vehicle parameters pre-filled. You pay directly to the insurance company with zero hidden intermediary fees.
+            When clicking <b class="text-white">"Buy on [Company] ↗"</b>, you will be redirected straight to the insurer's official purchase portal with your vehicle parameters pre-filled. You pay directly to the insurance company with zero agent commission added.
           </p>
         </div>
 
@@ -484,7 +463,6 @@
       </div>
 
       <div class="p-5 space-y-4 text-xs">
-        
         <!-- Own Damage Block -->
         <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
           <div class="flex justify-between items-center font-bold text-slate-800 mb-1.5">
@@ -520,9 +498,7 @@
             <span>C. Add-on Protection Riders</span>
             <span id="inv-addons-sum" class="font-mono text-brand-600">₹3,949</span>
           </div>
-          <div id="inv-addons-items" class="space-y-1.5 text-slate-600 text-[11px]">
-            <!-- Injected by JS -->
-          </div>
+          <div id="inv-addons-items" class="space-y-1.5 text-slate-600 text-[11px]"></div>
         </div>
 
         <!-- Totals & GST -->
@@ -534,7 +510,7 @@
           <div class="flex justify-between text-slate-600">
             <div>
               <span>Statutory GST (18%)</span>
-              <span class="text-[10px] text-slate-400 block">CGST 9% (₹1,052) + SGST 9% (₹1,052)</span>
+              <span class="text-[10px] text-slate-400 block">CGST 9% + SGST 9%</span>
             </div>
             <span id="inv-gst" class="font-mono font-semibold text-amber-700">₹2,103</span>
           </div>
@@ -546,7 +522,6 @@
             <span id="inv-total" class="font-mono text-lg text-brand-700">₹13,788</span>
           </div>
         </div>
-
       </div>
 
       <div class="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between gap-3">
@@ -605,7 +580,7 @@
         <button onclick="document.getElementById('idv-modal').classList.add('hidden')" class="text-slate-400 hover:text-slate-700">✕</button>
       </div>
       <p class="text-xs text-slate-600 leading-relaxed mb-3">
-        <b>IDV (Insured Declared Value)</b> represents the maximum current market value of your vehicle that the insurer will pay out in the event of theft or constructive total damage.
+        <b>IDV (Insured Declared Value)</b> represents the maximum current market value of your vehicle that the insurer will pay out in the event of total loss or theft.
       </p>
       <div class="text-xs space-y-2 bg-slate-50 p-3 rounded-xl border border-slate-200 mb-4 font-mono">
         <div class="font-sans font-semibold text-slate-800 text-[11px]">IRDAI Standard Vehicle Depreciation:</div>
@@ -664,7 +639,7 @@
         fullName: 'HDFC ERGO General Insurance Co.',
         rating: 4.8,
         reviewsCount: '86k',
-        csr: 98.4, // Claim Settlement Ratio %
+        csr: 98.4,
         garages: 11400,
         tatHours: 4,
         badge: 'Top Rated Insurer',
@@ -821,76 +796,160 @@
       }
     ];
 
-    // Vehicles Catalog
-    const VEHICLES_DATABASE = {
-      car: {
-        makes: {
-          'Hyundai': [
-            { name: 'Creta 1.5 SX', exShowroom: 1520000, cc: 1497, fuel: 'petrol' },
-            { name: 'Venue 1.2 Kappa', exShowroom: 980000, cc: 1197, fuel: 'petrol' },
-            { name: 'i20 Asta', exShowroom: 910000, cc: 1197, fuel: 'petrol' },
-            { name: 'Ioniq 5 EV', exShowroom: 4600000, cc: 0, fuel: 'electric' }
-          ],
-          'Maruti Suzuki': [
-            { name: 'Swift ZXi', exShowroom: 840000, cc: 1197, fuel: 'petrol' },
-            { name: 'Baleno Alpha', exShowroom: 950000, cc: 1197, fuel: 'petrol' },
-            { name: 'Brezza ZXi', exShowroom: 1150000, cc: 1462, fuel: 'petrol' },
-            { name: 'Grand Vitara Hybrid', exShowroom: 1880000, cc: 1490, fuel: 'petrol' }
-          ],
-          'Tata Motors': [
-            { name: 'Nexon Creative', exShowroom: 1180000, cc: 1199, fuel: 'petrol' },
-            { name: 'Nexon EV Empowered', exShowroom: 1780000, cc: 0, fuel: 'electric' },
-            { name: 'Harrier Fearless', exShowroom: 2420000, cc: 1956, fuel: 'diesel' },
-            { name: 'Punch Adventure CNG', exShowroom: 795000, cc: 1199, fuel: 'cng' }
-          ],
-          'Mahindra': [
-            { name: 'XUV700 AX7', exShowroom: 2280000, cc: 1997, fuel: 'petrol' },
-            { name: 'Scorpio-N Z8L', exShowroom: 2150000, cc: 2184, fuel: 'diesel' },
-            { name: 'Thar 4x4 Hard Top', exShowroom: 1720000, cc: 1997, fuel: 'petrol' }
-          ]
-        },
-        defaultMake: 'Hyundai',
-        defaultIdx: 0
-      },
-      bike: {
-        makes: {
-          'Royal Enfield': [
-            { name: 'Classic 350', exShowroom: 220000, cc: 349, fuel: 'petrol' },
-            { name: 'Hunter 350', exShowroom: 178000, cc: 349, fuel: 'petrol' },
-            { name: 'Himalayan 450', exShowroom: 298000, cc: 452, fuel: 'petrol' }
-          ],
-          'Honda': [
-            { name: 'Activa 6G DLX', exShowroom: 84000, cc: 109, fuel: 'petrol' },
-            { name: 'Shine 125', exShowroom: 86000, cc: 124, fuel: 'petrol' },
-            { name: 'CB350 Hness', exShowroom: 215000, cc: 348, fuel: 'petrol' }
-          ],
-          'TVS': [
-            { name: 'Jupiter 110', exShowroom: 81000, cc: 113, fuel: 'petrol' },
-            { name: 'Apache RTR 160 4V', exShowroom: 138000, cc: 159, fuel: 'petrol' },
-            { name: 'iQube Electric', exShowroom: 142000, cc: 0, fuel: 'electric' }
-          ],
-          'Ather Energy': [
-            { name: '450X Gen 3', exShowroom: 155000, cc: 0, fuel: 'electric' },
-            { name: 'Rizta Z', exShowroom: 148000, cc: 0, fuel: 'electric' }
-          ]
-        },
-        defaultMake: 'Royal Enfield',
-        defaultIdx: 0
-      },
-      commercial: {
-        makes: {
-          'Tata Commercial': [
-            { name: 'Ace Gold (Chota Hathi)', exShowroom: 540000, cc: 700, fuel: 'diesel' },
-            { name: 'Intra V30 Pick-up', exShowroom: 850000, cc: 1496, fuel: 'diesel' }
-          ],
-          'Mahindra Commercial': [
-            { name: 'Bolero Maxi Truck Plus', exShowroom: 780000, cc: 2523, fuel: 'diesel' },
-            { name: 'Supro Profit Truck', exShowroom: 640000, cc: 909, fuel: 'diesel' }
-          ]
-        },
-        defaultMake: 'Tata Commercial',
-        defaultIdx: 0
-      }
+    // Comprehensive Database of Indian Cars & Variants
+    const INDIAN_CARS_DATABASE = {
+      'Maruti Suzuki': [
+        { name: 'Swift ZXi (1.2L DualJet Petrol)', exShowroom: 840000, cc: 1197, fuel: 'petrol' },
+        { name: 'Swift VXi CNG', exShowroom: 820000, cc: 1197, fuel: 'cng' },
+        { name: 'Baleno Alpha (1.2L Petrol)', exShowroom: 940000, cc: 1197, fuel: 'petrol' },
+        { name: 'Brezza ZXi (1.5L K15C Petrol)', exShowroom: 1150000, cc: 1462, fuel: 'petrol' },
+        { name: 'Brezza ZXi CNG', exShowroom: 1220000, cc: 1462, fuel: 'cng' },
+        { name: 'Fronx Zeta (1.0L Turbo Boosterjet)', exShowroom: 1060000, cc: 998, fuel: 'petrol' },
+        { name: 'Fronx Delta CNG', exShowroom: 850000, cc: 1197, fuel: 'cng' },
+        { name: 'Grand Vitara Zeta Hybrid (1.5L)', exShowroom: 1840000, cc: 1490, fuel: 'petrol' },
+        { name: 'Grand Vitara Alpha AllGrip AWD', exShowroom: 1720000, cc: 1462, fuel: 'petrol' },
+        { name: 'Dzire ZXi (1.2L Petrol)', exShowroom: 890000, cc: 1197, fuel: 'petrol' },
+        { name: 'Ertiga ZXi (1.5L Petrol)', exShowroom: 1090000, cc: 1462, fuel: 'petrol' },
+        { name: 'Ertiga VXi CNG', exShowroom: 1080000, cc: 1462, fuel: 'cng' },
+        { name: 'XL6 Alpha+ (1.5L Petrol)', exShowroom: 1320000, cc: 1462, fuel: 'petrol' },
+        { name: 'Jimny Alpha 4x4 (1.5L)', exShowroom: 1380000, cc: 1462, fuel: 'petrol' },
+        { name: 'Wagon R ZXi 1.2L', exShowroom: 690000, cc: 1197, fuel: 'petrol' },
+        { name: 'Wagon R LXi CNG 1.0L', exShowroom: 645000, cc: 998, fuel: 'cng' },
+        { name: 'Alto K10 VXi+', exShowroom: 540000, cc: 998, fuel: 'petrol' },
+        { name: 'Celerio ZXi+', exShowroom: 670000, cc: 998, fuel: 'petrol' },
+        { name: 'Ignis Alpha 1.2L', exShowroom: 760000, cc: 1197, fuel: 'petrol' },
+        { name: 'Invicto Alpha+ Strong Hybrid (2.0L)', exShowroom: 2900000, cc: 1987, fuel: 'petrol' }
+      ],
+      'Tata Motors': [
+        { name: 'Nexon Creative 1.2L Turbo Petrol', exShowroom: 1180000, cc: 1199, fuel: 'petrol' },
+        { name: 'Nexon Fearless+ 1.5L Diesel AMT', exShowroom: 1540000, cc: 1497, fuel: 'diesel' },
+        { name: 'Nexon EV Empowered+ LR (45 kWh)', exShowroom: 1720000, cc: 0, fuel: 'electric' },
+        { name: 'Punch Creative (1.2L Petrol)', exShowroom: 885000, cc: 1199, fuel: 'petrol' },
+        { name: 'Punch Adventure iCNG (Twin-Cylinder)', exShowroom: 810000, cc: 1199, fuel: 'cng' },
+        { name: 'Punch EV Empowered+ (35 kWh)', exShowroom: 1330000, cc: 0, fuel: 'electric' },
+        { name: 'Curvv Accomplished 1.2L TGDi Turbo', exShowroom: 1470000, cc: 1199, fuel: 'petrol' },
+        { name: 'Curvv EV Empowered+ 55 kWh', exShowroom: 1930000, cc: 0, fuel: 'electric' },
+        { name: 'Harrier Fearless+ (2.0L Kryotec Diesel)', exShowroom: 2420000, cc: 1956, fuel: 'diesel' },
+        { name: 'Safari Accomplished+ 6/7-Seater Diesel', exShowroom: 2550000, cc: 1956, fuel: 'diesel' },
+        { name: 'Altroz XZ+ 1.2L i-Turbo Petrol', exShowroom: 910000, cc: 1199, fuel: 'petrol' },
+        { name: 'Altroz Racer R3 1.2L Turbo', exShowroom: 1100000, cc: 1199, fuel: 'petrol' },
+        { name: 'Altroz XZ iCNG', exShowroom: 890000, cc: 1199, fuel: 'cng' },
+        { name: 'Tiago XZ+ 1.2L Revotron', exShowroom: 730000, cc: 1199, fuel: 'petrol' },
+        { name: 'Tiago EV XZ+ Tech LUX (24 kWh)', exShowroom: 1100000, cc: 0, fuel: 'electric' },
+        { name: 'Tigor XZ+ iCNG', exShowroom: 860000, cc: 1199, fuel: 'cng' }
+      ],
+      'Hyundai': [
+        { name: 'Creta 1.5 SX (1.5L MPi Petrol)', exShowroom: 1530000, cc: 1497, fuel: 'petrol' },
+        { name: 'Creta SX(O) 1.5L CRDi Diesel AT', exShowroom: 2020000, cc: 1493, fuel: 'diesel' },
+        { name: 'Creta N Line N8 (1.5L Turbo GDi)', exShowroom: 1680000, cc: 1482, fuel: 'petrol' },
+        { name: 'Venue SX 1.2L Kappa Petrol', exShowroom: 1100000, cc: 1197, fuel: 'petrol' },
+        { name: 'Venue SX(O) 1.0L Turbo DCT', exShowroom: 1330000, cc: 998, fuel: 'petrol' },
+        { name: 'Venue N Line N8 Turbo', exShowroom: 1380000, cc: 998, fuel: 'petrol' },
+        { name: 'Exter SX(O) Connect 1.2L Petrol', exShowroom: 940000, cc: 1197, fuel: 'petrol' },
+        { name: 'Exter S CNG (Hy-CNG Duo)', exShowroom: 840000, cc: 1197, fuel: 'cng' },
+        { name: 'i20 Asta(O) 1.2L Kappa', exShowroom: 1000000, cc: 1197, fuel: 'petrol' },
+        { name: 'i20 N Line N8 1.0L Turbo', exShowroom: 1230000, cc: 998, fuel: 'petrol' },
+        { name: 'Grand i10 Nios Asta 1.2L', exShowroom: 800000, cc: 1197, fuel: 'petrol' },
+        { name: 'Aura SX CNG 1.2L', exShowroom: 905000, cc: 1197, fuel: 'cng' },
+        { name: 'Alcazar Signature 1.5L Turbo Petrol', exShowroom: 2120000, cc: 1482, fuel: 'petrol' },
+        { name: 'Tucson Signature 2.0L Diesel AWD', exShowroom: 3580000, cc: 1997, fuel: 'diesel' },
+        { name: 'Ioniq 5 Long Range EV (72.6 kWh)', exShowroom: 4600000, cc: 0, fuel: 'electric' }
+      ],
+      'Mahindra': [
+        { name: 'Scorpio-N Z8L (2.2L mHawk Diesel 4WD)', exShowroom: 2450000, cc: 2184, fuel: 'diesel' },
+        { name: 'Scorpio-N Z8 (2.0L mStallion Turbo Petrol)', exShowroom: 2020000, cc: 1997, fuel: 'petrol' },
+        { name: 'Scorpio Classic S11 (2.2L Diesel)', exShowroom: 1740000, cc: 2184, fuel: 'diesel' },
+        { name: 'XUV700 AX7 Luxury 2.2L Diesel AT AWD', exShowroom: 2600000, cc: 2184, fuel: 'diesel' },
+        { name: 'XUV700 AX5 2.0L Turbo Petrol', exShowroom: 1780000, cc: 1997, fuel: 'petrol' },
+        { name: 'Thar ROXX AX7L (5-Door 2.2L Diesel 4x4)', exShowroom: 2250000, cc: 2184, fuel: 'diesel' },
+        { name: 'Thar LX Hard Top (3-Door 2.0L Turbo 4x4)', exShowroom: 1700000, cc: 1997, fuel: 'petrol' },
+        { name: 'Thar RWD 1.5L Diesel', exShowroom: 1140000, cc: 1497, fuel: 'diesel' },
+        { name: 'XUV 3XO AX7L 1.2L TGDi Turbo Petrol', exShowroom: 1400000, cc: 1197, fuel: 'petrol' },
+        { name: 'XUV 3XO AX5 1.5L CRDe Diesel AMT', exShowroom: 1210000, cc: 1497, fuel: 'diesel' },
+        { name: 'Bolero Neo N10 (O) (1.5L mHawk Diesel)', exShowroom: 1220000, cc: 1493, fuel: 'diesel' },
+        { name: 'Bolero B6 Opt (1.5L mHawk Diesel)', exShowroom: 1080000, cc: 1493, fuel: 'diesel' },
+        { name: 'XUV400 EV EL Pro (39.4 kWh)', exShowroom: 1750000, cc: 0, fuel: 'electric' }
+      ],
+      'Kia': [
+        { name: 'Seltos GTX+ (1.5L Turbo GDi Petrol DCT)', exShowroom: 2000000, cc: 1482, fuel: 'petrol' },
+        { name: 'Seltos HTX+ (1.5L CRDi Diesel AT)', exShowroom: 1980000, cc: 1493, fuel: 'diesel' },
+        { name: 'Seltos HTK+ 1.5L Naturally Aspirated', exShowroom: 1410000, cc: 1497, fuel: 'petrol' },
+        { name: 'Sonet X-Line 1.0L Turbo DCT', exShowroom: 1480000, cc: 998, fuel: 'petrol' },
+        { name: 'Sonet HTX 1.5L CRDi Diesel', exShowroom: 1230000, cc: 1493, fuel: 'diesel' },
+        { name: 'Carens Luxury Plus (1.5L Turbo Petrol 6/7-Str)', exShowroom: 1890000, cc: 1482, fuel: 'petrol' },
+        { name: 'Carens Prestige Plus 1.5L Diesel', exShowroom: 1540000, cc: 1493, fuel: 'diesel' },
+        { name: 'Carnival Limousine Plus (2.2L Diesel AT)', exShowroom: 6390000, cc: 2151, fuel: 'diesel' },
+        { name: 'EV6 GT Line AWD (77.4 kWh)', exShowroom: 6590000, cc: 0, fuel: 'electric' }
+      ],
+      'Toyota': [
+        { name: 'Innova Hycross ZX(O) Strong Hybrid (2.0L)', exShowroom: 3100000, cc: 1987, fuel: 'petrol' },
+        { name: 'Innova Hycross GX (2.0L Petrol)', exShowroom: 1980000, cc: 1987, fuel: 'petrol' },
+        { name: 'Innova Crysta 2.4L ZX Diesel', exShowroom: 2630000, cc: 2393, fuel: 'diesel' },
+        { name: 'Fortuner Legender 2.8L 4x4 AT Diesel', exShowroom: 4760000, cc: 2755, fuel: 'diesel' },
+        { name: 'Fortuner 4x2 AT 2.7L Petrol', exShowroom: 3500000, cc: 2694, fuel: 'petrol' },
+        { name: 'Urban Cruiser Hyryder V Hybrid', exShowroom: 2000000, cc: 1490, fuel: 'petrol' },
+        { name: 'Urban Cruiser Hyryder G NeoDrive CNG', exShowroom: 1560000, cc: 1462, fuel: 'cng' },
+        { name: 'Urban Cruiser Taisor 1.0L Turbo', exShowroom: 1060000, cc: 998, fuel: 'petrol' },
+        { name: 'Glanza V (1.2L Petrol)', exShowroom: 980000, cc: 1197, fuel: 'petrol' },
+        { name: 'Hilux 2.8L 4x4 High AT', exShowroom: 3800000, cc: 2755, fuel: 'diesel' },
+        { name: 'Camry 2.5L Hybrid AT', exShowroom: 4620000, cc: 2487, fuel: 'petrol' }
+      ],
+      'Honda': [
+        { name: 'Elevate ZX 1.5L i-VTEC CVT', exShowroom: 1530000, cc: 1498, fuel: 'petrol' },
+        { name: 'City 5th Gen ZX 1.5L i-VTEC', exShowroom: 1610000, cc: 1498, fuel: 'petrol' },
+        { name: 'City e:HEV ZX Hybrid (1.5L)', exShowroom: 2050000, cc: 1498, fuel: 'petrol' },
+        { name: 'Amaze VX 1.2L i-VTEC CVT', exShowroom: 990000, cc: 1199, fuel: 'petrol' }
+      ],
+      'Volkswagen': [
+        { name: 'Virtus GT Plus Edge 1.5L TSI EVO DSG', exShowroom: 1940000, cc: 1498, fuel: 'petrol' },
+        { name: 'Virtus Topline 1.0L TSI AT', exShowroom: 1640000, cc: 999, fuel: 'petrol' },
+        { name: 'Taigun GT Plus Chrome 1.5L TSI DSG', exShowroom: 1970000, cc: 1498, fuel: 'petrol' },
+        { name: 'Taigun Topline 1.0L TSI AT', exShowroom: 1740000, cc: 999, fuel: 'petrol' },
+        { name: 'Tiguan Elegance 2.0L TSI 4MOTION DSG', exShowroom: 3520000, cc: 1984, fuel: 'petrol' }
+      ],
+      'Skoda': [
+        { name: 'Kylaq Prestige 1.0L TSI AT', exShowroom: 1350000, cc: 999, fuel: 'petrol' },
+        { name: 'Slavia Style 1.5L TSI DSG', exShowroom: 1910000, cc: 1498, fuel: 'petrol' },
+        { name: 'Slavia Ambition 1.0L TSI AT', exShowroom: 1520000, cc: 999, fuel: 'petrol' },
+        { name: 'Kushaq Monte Carlo 1.5L TSI DSG', exShowroom: 1980000, cc: 1498, fuel: 'petrol' },
+        { name: 'Kushaq Style 1.0L TSI AT', exShowroom: 1600000, cc: 999, fuel: 'petrol' },
+        { name: 'Kodiaq L&K 2.0L TSI 4x4 DSG', exShowroom: 4000000, cc: 1984, fuel: 'petrol' }
+      ],
+      'MG Motor': [
+        { name: 'Windsor EV Essence (38 kWh Battery)', exShowroom: 1550000, cc: 0, fuel: 'electric' },
+        { name: 'ZS EV Exclusive Plus (50.3 kWh)', exShowroom: 2500000, cc: 0, fuel: 'electric' },
+        { name: 'Comet EV Plush (17.3 kWh)', exShowroom: 940000, cc: 0, fuel: 'electric' },
+        { name: 'Hector Sharp Pro 2.0L Diesel', exShowroom: 2210000, cc: 1956, fuel: 'diesel' },
+        { name: 'Hector Savvy Pro 1.5L Turbo CVT', exShowroom: 2180000, cc: 1451, fuel: 'petrol' },
+        { name: 'Astor Savvy Pro 1.5L CVT', exShowroom: 1710000, cc: 1498, fuel: 'petrol' },
+        { name: 'Gloster Blackstorm 4WD (2.0L Twin-Turbo)', exShowroom: 4320000, cc: 1996, fuel: 'diesel' }
+      ],
+      'Renault': [
+        { name: 'Kiger RXZ 1.0L Turbo CVT', exShowroom: 1100000, cc: 999, fuel: 'petrol' },
+        { name: 'Triber RXZ 1.0L (7-Seater)', exShowroom: 820000, cc: 999, fuel: 'petrol' },
+        { name: 'Kwid Climber 1.0L AMT', exShowroom: 630000, cc: 999, fuel: 'petrol' }
+      ],
+      'Nissan': [
+        { name: 'Magnite Tekna+ 1.0L Turbo CVT', exShowroom: 1150000, cc: 999, fuel: 'petrol' },
+        { name: 'Magnite N-Connecta 1.0L Petrol', exShowroom: 780000, cc: 999, fuel: 'petrol' },
+        { name: 'X-Trail 1.5L Variable Compression Turbo', exShowroom: 4990000, cc: 1498, fuel: 'petrol' }
+      ],
+      'BMW': [
+        { name: '3 Series Gran Limousine 330Li M Sport', exShowroom: 6060000, cc: 1998, fuel: 'petrol' },
+        { name: 'X1 sDrive18d M Sport', exShowroom: 5250000, cc: 1995, fuel: 'diesel' },
+        { name: 'X5 xDrive40i M Sport', exShowroom: 10800000, cc: 2998, fuel: 'petrol' },
+        { name: 'i4 eDrive40 Electric (83.9 kWh)', exShowroom: 7250000, cc: 0, fuel: 'electric' }
+      ],
+      'Mercedes-Benz': [
+        { name: 'C-Class C 200 (1.5L Turbo Petrol)', exShowroom: 6180000, cc: 1496, fuel: 'petrol' },
+        { name: 'E-Class E 220d LWB (2.0L Diesel)', exShowroom: 7890000, cc: 1993, fuel: 'diesel' },
+        { name: 'GLC 300 4MATIC (2.0L Turbo)', exShowroom: 7590000, cc: 1999, fuel: 'petrol' }
+      ],
+      'Audi': [
+        { name: 'A4 40 TFSI Technology (2.0L Turbo)', exShowroom: 5180000, cc: 1984, fuel: 'petrol' },
+        { name: 'Q3 40 TFSI Quattro Technology', exShowroom: 5320000, cc: 1984, fuel: 'petrol' },
+        { name: 'Q7 55 TFSI Quattro (3.0L V6 Turbo)', exShowroom: 9450000, cc: 2995, fuel: 'petrol' }
+      ]
     };
 
     // State mapping for RTO lookup
@@ -917,11 +976,10 @@
 
     // Application state
     let state = {
-      category: 'car',
       policyType: 'comprehensive',
       registrationNumber: 'UP14AB1234',
-      currentIdv: 720000,
-      recommendedIdv: 720000,
+      currentIdv: 1140000,
+      recommendedIdv: 1140000,
       selectedCompare: ['hdfc_ergo', 'icici_lombard'],
       computedQuotes: [],
       modalQuoteId: null,
@@ -931,35 +989,16 @@
 
     window.addEventListener('DOMContentLoaded', () => {
       populateMakes();
+      document.getElementById('vehicle-make').value = 'Hyundai';
       onMakeChange();
       recalculateQuotes();
     });
-
-    function setVehicleCategory(cat) {
-      state.category = cat;
-      
-      ['car', 'bike', 'commercial'].forEach(c => {
-        const btn = document.getElementById(`cat-${c}-btn`);
-        if (c === cat) {
-          btn.className = 'cat-btn py-2 text-xs font-bold rounded-lg transition-all shadow-xs bg-white text-brand-700 flex items-center justify-center gap-1.5';
-        } else {
-          btn.className = 'cat-btn py-2 text-xs font-medium rounded-lg transition-all text-slate-600 hover:text-slate-900 flex items-center justify-center gap-1.5';
-        }
-      });
-
-      document.getElementById('vehicle-type-label').innerText = cat === 'car' ? 'Private Car' : cat === 'bike' ? 'Two-Wheeler' : 'Commercial Vehicle';
-
-      populateMakes();
-      onMakeChange();
-      recalculateQuotes();
-    }
 
     function onRegNumberChange(val) {
       const cleanVal = val.toUpperCase().replace(/[^A-Z0-9]/g, '');
       document.getElementById('reg-number-input').value = cleanVal;
       state.registrationNumber = cleanVal;
 
-      // Extract State + RTO code prefix (e.g. UP14, DL01)
       const prefix = cleanVal.slice(0, 4);
       const rtoTag = document.getElementById('rto-detected-tag');
       if (RTO_MAP[prefix]) {
@@ -979,14 +1018,13 @@
     function populateMakes() {
       const makeSelect = document.getElementById('vehicle-make');
       makeSelect.innerHTML = '';
-      const makes = Object.keys(VEHICLES_DATABASE[state.category].makes);
+      const makes = Object.keys(INDIAN_CARS_DATABASE);
       makes.forEach(m => {
         const opt = document.createElement('option');
         opt.value = m;
         opt.textContent = m;
         makeSelect.appendChild(opt);
       });
-      makeSelect.value = VEHICLES_DATABASE[state.category].defaultMake;
     }
 
     function onMakeChange() {
@@ -994,7 +1032,7 @@
       const modelSelect = document.getElementById('vehicle-model');
       modelSelect.innerHTML = '';
 
-      const models = VEHICLES_DATABASE[state.category].makes[make] || [];
+      const models = INDIAN_CARS_DATABASE[make] || [];
       models.forEach((m, idx) => {
         const opt = document.createElement('option');
         opt.value = idx;
@@ -1021,7 +1059,7 @@
     function getSelectedVehicle() {
       const make = document.getElementById('vehicle-make').value;
       const idx = parseInt(document.getElementById('vehicle-model').value, 10) || 0;
-      const list = VEHICLES_DATABASE[state.category].makes[make];
+      const list = INDIAN_CARS_DATABASE[make];
       return list ? list[idx] : null;
     }
 
@@ -1110,23 +1148,12 @@
       recalculateQuotes();
     }
 
-    // Official IRDAI Statutory Motor Third Party Tariffs
-    function getStatutoryTpTariff(cc, fuel, category) {
-      if (category === 'bike') {
-        if (fuel === 'electric') return 620;
-        if (cc < 75) return 538;
-        if (cc <= 150) return 714;
-        if (cc <= 350) return 1366;
-        return 2804;
-      } else if (category === 'car') {
-        if (fuel === 'electric') return 1780;
-        if (cc < 1000) return 2094;
-        if (cc <= 1500) return 3416;
-        return 7890;
-      } else {
-        // Commercial goods carriage
-        return 11200;
-      }
+    // Official IRDAI Statutory Motor Third Party Tariffs for 4-Wheelers
+    function getStatutoryTpTariff(cc, fuel) {
+      if (fuel === 'electric') return 1780;
+      if (cc < 1000) return 2094;
+      if (cc <= 1500) return 3416;
+      return 7890;
     }
 
     function recalculateQuotes() {
@@ -1135,14 +1162,12 @@
 
       const fuel = document.getElementById('vehicle-fuel').value;
       const ncbPercent = parseInt(document.getElementById('ncb-select').value, 10);
-      const isComp = state.policyType === 'comprehensive';
       const isTpOnly = state.policyType === 'tp';
       const isOdOnly = state.policyType === 'od';
 
       document.getElementById('vehicle-hero-title').innerText = `${document.getElementById('vehicle-make').value} ${vehicle.name}`;
       document.getElementById('ncb-discount-badge').innerText = `${ncbPercent}% OD Discount`;
 
-      // Checkbox states
       const hasZeroDep = document.getElementById('addon-zerodep').checked;
       const hasEngine = document.getElementById('addon-engine').checked;
       const hasRsa = document.getElementById('addon-rsa').checked;
@@ -1151,10 +1176,9 @@
       const hasKey = document.getElementById('addon-key').checked;
       const hasPa = document.getElementById('addon-pa').checked;
 
-      const tpStatutory = getStatutoryTpTariff(vehicle.cc, fuel, state.category);
+      const tpStatutory = getStatutoryTpTariff(vehicle.cc, fuel);
 
       state.computedQuotes = INSURERS.map(ins => {
-        // 1. Own Damage
         let odBase = 0;
         let ncbAmount = 0;
         let odNet = 0;
@@ -1165,13 +1189,11 @@
           odNet = odBase - ncbAmount;
         }
 
-        // 2. Third Party
         let finalTp = 0;
         if (!isOdOnly) {
           finalTp = tpStatutory;
         }
 
-        // 3. Add-ons
         let addonsTotal = 0;
         const addonList = {};
 
@@ -1239,7 +1261,6 @@
         if (sortBy === 'price_desc') return b.finalPayable - a.finalPayable;
         if (sortBy === 'csr_desc') return b.csr - a.csr;
         if (sortBy === 'garages_desc') return b.garages - a.garages;
-        // recommended: CSR + Rating vs Cost
         const valA = (a.rating * 15) + a.csr - (a.finalPayable / 800);
         const valB = (b.rating * 15) + b.csr - (b.finalPayable / 800);
         return valB - valA;
@@ -1257,7 +1278,6 @@
 
         card.innerHTML = `
           <div class="p-5">
-            <!-- Insurer Header & Price Highlight -->
             <div class="flex flex-wrap items-start justify-between gap-3 pb-3 border-b border-slate-100">
               <div class="flex items-center gap-3">
                 <div class="w-12 h-12 rounded-xl flex items-center justify-center font-black text-sm border shadow-xs ${q.logoBg}">
@@ -1281,7 +1301,6 @@
                 </div>
               </div>
 
-              <!-- Price Box with Line-item trigger -->
               <div class="text-right sm:ml-auto">
                 <div class="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Total (inc. 18% GST)</div>
                 <div class="text-2xl font-black font-mono text-slate-900 tracking-tight">₹${q.finalPayable.toLocaleString('en-IN')}</div>
@@ -1291,7 +1310,6 @@
               </div>
             </div>
 
-            <!-- Key Metric Indicators -->
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 py-3 my-2 text-xs bg-slate-50 rounded-xl px-3 border border-slate-100 font-mono">
               <div>
                 <span class="text-[10px] font-sans text-slate-400 block font-medium">Settlement (CSR)</span>
@@ -1314,7 +1332,6 @@
               </div>
             </div>
 
-            <!-- Highlights / Perks -->
             <div class="flex flex-wrap items-center gap-2 mb-4">
               ${q.perks.map(p => `
                 <span class="inline-flex items-center text-[10px] font-medium bg-slate-100 text-slate-700 px-2 py-0.5 rounded-md border border-slate-200">
@@ -1324,7 +1341,6 @@
               `).join('')}
             </div>
 
-            <!-- Bottom Row: Comparison Checkbox & Direct Buy CTA -->
             <div class="flex items-center justify-between gap-3 pt-1">
               <label class="inline-flex items-center gap-2 text-xs font-semibold text-slate-600 cursor-pointer select-none">
                 <input type="checkbox" onchange="toggleCompare('${q.id}')" ${isCompared ? 'checked' : ''} class="w-4 h-4 rounded text-brand-600 focus:ring-brand-500 border-slate-300">
@@ -1536,7 +1552,6 @@
       const year = encodeURIComponent(document.getElementById('vehicle-year').value);
       const fuel = encodeURIComponent(document.getElementById('vehicle-fuel').value);
 
-      // Build target outbound link passing parameters where supported by insurer landing pages
       switch(quote.id) {
         case 'hdfc_ergo':
           return `https://www.hdfcergo.com/car-insurance?regNo=${reg}&make=${make}&model=${model}&fuel=${fuel}&regYear=${year}&utm_source=direct_compare`;
@@ -1571,7 +1586,6 @@
 
       document.getElementById('redirect-modal').classList.remove('hidden');
 
-      // Auto redirect after 1.8 seconds if user doesn't abort
       state.redirectTimeout = setTimeout(() => {
         executePendingRedirect();
       }, 1800);
@@ -1583,7 +1597,6 @@
       }
       document.getElementById('redirect-modal').classList.add('hidden');
       if (state.pendingRedirectUrl) {
-        // Open insurer landing page directly in a new secure window
         window.open(state.pendingRedirectUrl, '_blank', 'noopener,noreferrer');
         showToast('Opened insurer direct portal in a new tab.');
       }
@@ -1598,7 +1611,6 @@
       showToast('Redirection canceled');
     }
 
-    // Modal Helpers
     function showIdvExplainModal() {
       document.getElementById('idv-modal').classList.remove('hidden');
     }
@@ -1608,7 +1620,8 @@
     }
 
     function resetDefaults() {
-      setVehicleCategory('car');
+      document.getElementById('vehicle-make').value = 'Hyundai';
+      onMakeChange();
       document.getElementById('reg-number-input').value = 'UP14AB1234';
       onRegNumberChange('UP14AB1234');
       document.getElementById('vehicle-year').value = '2024';
