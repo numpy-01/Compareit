@@ -3,274 +3,392 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BimaCompare | Motor Insurance Comparison & Direct Redirect</title>
+  <title>InsureWise India - Compare & Buy Motor Insurance Directly</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
   <script>
     tailwind.config = {
+      darkMode: 'class',
       theme: {
         extend: {
           fontFamily: {
             sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
           },
           colors: {
-            primary: {
-              50: '#eef2ff',
-              100: '#e0e7ff',
-              500: '#6366f1',
-              600: '#4f46e5',
-              700: '#4338ca',
-            },
+            brand: {
+              50: '#eef6ff',
+              100: '#d9eaff',
+              200: '#bbd8ff',
+              500: '#1d4ed8',
+              600: '#1e40af',
+              700: '#1e3a8a',
+            }
           }
         }
       }
-    };
+    }
   </script>
+
   <style>
+    /* Custom styling for ranges, scrollbars, and modals */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #f8fafc; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    .modal-overlay {
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(6px);
+    }
     input[type=range]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      height: 20px;
-      width: 20px;
+      height: 18px;
+      width: 18px;
       border-radius: 50%;
-      background: #4f46e5;
+      background: #1e40af;
       cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
     }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
+<body class="bg-slate-100 text-slate-800 font-sans min-h-screen flex flex-col antialiased selection:bg-brand-600 selection:text-white">
 
-  <!-- Header -->
-  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+  <!-- IRDAI Transparency & Compliance Ribbon -->
+  <div class="bg-slate-900 text-slate-300 text-xs py-2 px-4 border-b border-slate-800 select-none">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center space-x-3">
+        <span class="inline-flex items-center text-emerald-400 font-semibold tracking-wide">
+          <svg class="w-3.5 h-3.5 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          Direct-To-Insurer Comparison
+        </span>
+        <span class="text-slate-600">|</span>
+        <span class="text-slate-400 hidden sm:inline">Indicative IRDAI tariffs • Zero broker commission markups</span>
+      </div>
+      <div class="flex items-center space-x-4 text-[11px]">
+        <span class="text-amber-400 font-medium">★ 4.9/5 by 180,000+ Indian Motorists</span>
+        <span class="text-slate-500">•</span>
+        <a href="#faq" onclick="openFaqModal()" class="hover:text-white underline decoration-slate-600 transition">How Claims Work</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Header -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-xs">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <div class="flex items-center space-x-3">
-        <div class="h-10 w-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white text-xl shadow-md shadow-indigo-200">
-          <i class="fa-solid fa-shield-halved"></i>
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-700 to-blue-500 flex items-center justify-center text-white shadow-md shadow-brand-500/20">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
         </div>
         <div>
-          <span class="text-xl font-bold tracking-tight text-slate-900">Bima<span class="text-indigo-600">Compare</span></span>
-          <span class="hidden sm:inline-block ml-2 text-xs font-semibold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Direct Insurer Redirect</span>
+          <div class="flex items-center gap-1.5">
+            <span class="text-xl font-extrabold tracking-tight text-slate-900">Insure<span class="text-brand-600">Direct</span></span>
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-brand-50 text-brand-700 px-1.5 py-0.2 rounded border border-brand-200">India</span>
+          </div>
+          <p class="text-[10px] text-slate-400 font-medium">Compare & Buy Directly on Company Portals</p>
         </div>
       </div>
-      <div class="flex items-center space-x-4">
-        <div class="text-right hidden md:block">
-          <div class="text-xs text-slate-500">Benchmark Engine</div>
-          <div class="text-xs font-semibold text-slate-700">IRDAI Tariff Compliant</div>
-        </div>
-        <div class="h-8 w-px bg-slate-200 hidden md:block"></div>
-        <a href="#quote-section" class="text-xs font-semibold bg-slate-900 text-white px-3.5 py-2 rounded-lg hover:bg-slate-800 transition">Compare Quotes</a>
+
+      <!-- Action items -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <button id="compare-top-badge-btn" onclick="openSideBySideModal()" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-300 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition shadow-xs">
+          <svg class="w-4 h-4 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          <span class="hidden sm:inline">Compare</span>
+          <span id="compare-count-tag" class="bg-brand-600 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">2/3</span>
+        </button>
+        <button onclick="resetDefaults()" class="p-2 text-slate-500 hover:text-slate-800 rounded-lg hover:bg-slate-100 transition" title="Reset all fields">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+        </button>
       </div>
     </div>
   </header>
 
-  <!-- Hero & Vehicle Input Section -->
-  <section class="bg-gradient-to-b from-indigo-50/60 to-slate-50 border-b border-slate-200 py-8 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-7xl mx-auto">
-      <div class="text-center max-w-3xl mx-auto mb-8">
-        <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-          Compare Top Motor Insurance Policies
-        </h1>
-        <p class="mt-2 text-sm sm:text-base text-slate-600">
-          Accurate IRDAI tariff estimates, live discounts, and 1-click redirection to official insurer portals for policy issuance.
-        </p>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full flex-1">
+    
+    <!-- Hero / Registration quick notice -->
+    <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-3 bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs">
+      <div>
+        <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">Compare Real-Time Motor Insurance Plans</h1>
+        <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Select vehicle specifications and add-ons below. Choose a policy to proceed directly to the insurer's checkout.</p>
       </div>
-
-      <!-- Quick Vehicle Form Card -->
-      <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-200 max-w-5xl mx-auto">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <!-- Reg Number -->
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Vehicle Reg No.</label>
-            <div class="relative">
-              <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400 text-sm">
-                <i class="fa-solid fa-hashtag"></i>
-              </span>
-              <input type="text" id="regNumber" value="UP14AB1234" placeholder="e.g. MH02DW8765" class="w-full uppercase font-mono tracking-wider pl-9 pr-3 py-2.5 text-sm font-semibold rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition" />
-            </div>
-            <div id="rtoDisplay" class="text-[11px] font-medium text-indigo-600 mt-1">Ghaziabad RTO, Zone A</div>
-          </div>
-
-          <!-- Vehicle Segment & Model -->
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Vehicle Model</label>
-            <select id="vehicleModel" class="w-full py-2.5 px-3 text-sm font-semibold rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition bg-white">
-              <option value="maruti_brezza" data-exshowroom="950000" data-cc="1462" data-fuel="Petrol">Maruti Brezza (1462cc, Petrol)</option>
-              <option value="hyundai_creta" data-exshowroom="1350000" data-cc="1497" data-fuel="Petrol">Hyundai Creta (1497cc, Petrol)</option>
-              <option value="tata_nexon" data-exshowroom="1050000" data-cc="1199" data-fuel="Petrol">Tata Nexon (1199cc, Petrol)</option>
-              <option value="mahindra_scorpio" data-exshowroom="1800000" data-cc="2184" data-fuel="Diesel">Mahindra Scorpio (2184cc, Diesel)</option>
-              <option value="tata_tiago_ev" data-exshowroom="900000" data-cc="0" data-fuel="EV">Tata Tiago EV (Electric Motor)</option>
-              <option value="honda_activa" data-exshowroom="820000" data-cc="110" data-fuel="Two-Wheeler">Honda Activa 6G (Two-Wheeler)</option>
-            </select>
-          </div>
-
-          <!-- Reg Year -->
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Registration Year</label>
-            <select id="regYear" class="w-full py-2.5 px-3 text-sm font-semibold rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition bg-white">
-              <option value="2026">2026 (Brand New - 5% Dep)</option>
-              <option value="2025">2025 (Up to 1 yr - 15% Dep)</option>
-              <option value="2024" selected>2024 (Up to 2 yrs - 20% Dep)</option>
-              <option value="2023">2023 (Up to 3 yrs - 30% Dep)</option>
-              <option value="2022">2022 (Up to 4 yrs - 40% Dep)</option>
-              <option value="2020">2020 or Older (50% Dep)</option>
-            </select>
-          </div>
-
-          <!-- Previous Claim & NCB -->
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Existing NCB %</label>
-            <select id="ncbSelect" class="w-full py-2.5 px-3 text-sm font-semibold rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition bg-white">
-              <option value="0">0% (Made claim in last year)</option>
-              <option value="0.20" selected>20% (1 claim-free year)</option>
-              <option value="0.25">25% (2 claim-free years)</option>
-              <option value="0.35">35% (3 claim-free years)</option>
-              <option value="0.45">45% (4 claim-free years)</option>
-              <option value="0.50">50% (5+ claim-free years)</option>
-            </select>
-          </div>
-        </div>
+      <div class="flex items-center gap-2 bg-blue-50 border border-blue-200 text-blue-900 px-3 py-1.5 rounded-xl text-xs font-medium self-start md:self-auto">
+        <svg class="w-4 h-4 text-brand-600 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
+        <span>Updated according to latest IRDAI Third-Party Tariffs</span>
       </div>
     </div>
-  </section>
 
-  <!-- Main Comparison Area -->
-  <main id="quote-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <!-- 2 Column Master Layout: Specifications & Riders (5 Cols) vs Real-Time Quotes Feed (7 Cols) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      
+      <!-- LEFT COLUMN (5 Columns) -->
+      <div class="lg:col-span-5 space-y-5">
+        
+        <!-- SECTION 1: Vehicle & RTO Identity -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
+              <span class="w-2 h-3.5 bg-brand-600 rounded-xs inline-block"></span>
+              1. Vehicle Details
+            </h2>
+            <span id="vehicle-type-label" class="text-[11px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md font-semibold">Private Car</span>
+          </div>
 
-      <!-- Left Control Panel: IDV, Policy Type, Add-ons -->
-      <div class="lg:col-span-4 space-y-6">
-
-        <!-- IDV Customizer Card -->
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-          <div class="flex items-center justify-between mb-3">
-            <div>
-              <h3 class="text-sm font-bold text-slate-900">Insured Declared Value (IDV)</h3>
-              <p class="text-xs text-slate-500">Maximum insured claim reimbursement</p>
+          <!-- Vehicle Category Tabs -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Vehicle Category</label>
+            <div class="grid grid-cols-3 gap-2 p-1 bg-slate-100 rounded-xl">
+              <button type="button" onclick="setVehicleCategory('car')" id="cat-car-btn" class="cat-btn py-2 text-xs font-bold rounded-lg transition-all shadow-xs bg-white text-brand-700 flex items-center justify-center gap-1.5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9L2 12v4c0 .6.4 1 1 1h2m14 0a2 2 0 100 4 2 2 0 000-4zm-12 0a2 2 0 100 4 2 2 0 000-4z"/></svg>
+                Car
+              </button>
+              <button type="button" onclick="setVehicleCategory('bike')" id="cat-bike-btn" class="cat-btn py-2 text-xs font-medium rounded-lg transition-all text-slate-600 hover:text-slate-900 flex items-center justify-center gap-1.5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Two-Wheeler
+              </button>
+              <button type="button" onclick="setVehicleCategory('commercial')" id="cat-commercial-btn" class="cat-btn py-2 text-xs font-medium rounded-lg transition-all text-slate-600 hover:text-slate-900 flex items-center justify-center gap-1.5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                Commercial
+              </button>
             </div>
-            <button id="resetIdvBtn" class="text-[11px] font-semibold text-indigo-600 hover:text-indigo-800 bg-indigo-50 px-2 py-1 rounded">Reset</button>
           </div>
 
-          <div class="text-2xl font-extrabold text-slate-900 mb-2" id="idvDisplay">₹ 7,60,000</div>
+          <!-- Registration Number with Auto-RTO Parser -->
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <label for="reg-number-input" class="text-xs font-semibold text-slate-700">Vehicle Registration Number</label>
+              <span id="rto-detected-tag" class="text-[10px] font-mono font-bold text-brand-700 bg-brand-50 border border-brand-200 px-2 py-0.5 rounded">RTO: UP-14 (Ghaziabad)</span>
+            </div>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <span class="text-[11px] font-bold text-slate-400 border-r border-slate-300 pr-2">IND</span>
+              </div>
+              <input 
+                type="text" 
+                id="reg-number-input" 
+                value="UP14AB1234" 
+                maxlength="11" 
+                oninput="onRegNumberChange(this.value)"
+                class="w-full pl-14 pr-3 py-2 text-xs uppercase font-mono font-bold tracking-wider bg-slate-50 border border-slate-300 rounded-lg text-slate-900 focus:ring-2 focus:ring-brand-500 focus:outline-none"
+                placeholder="e.g. DL01AB1234, MH02CD9999"
+              >
+            </div>
+            <p class="text-[10px] text-slate-400 mt-1">Entering your state and RTO series automatically determines your city zone.</p>
+          </div>
 
-          <input type="range" id="idvSlider" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600" />
+          <!-- Make & Model Selectors -->
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label for="vehicle-make" class="block text-xs font-semibold text-slate-600 mb-1">Make / Brand</label>
+              <select id="vehicle-make" onchange="onMakeChange()" class="w-full text-xs font-medium bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-slate-800 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                <!-- Injected via JS -->
+              </select>
+            </div>
+            <div>
+              <label for="vehicle-model" class="block text-xs font-semibold text-slate-600 mb-1">Model & Variant</label>
+              <select id="vehicle-model" onchange="onModelChange()" class="w-full text-xs font-medium bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-slate-800 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                <!-- Injected via JS -->
+              </select>
+            </div>
+          </div>
 
-          <div class="flex justify-between text-[11px] font-medium text-slate-400 mt-2">
-            <span id="minIdvLabel">Min: ₹ 6,08,000</span>
-            <span id="maxIdvLabel">Max: ₹ 8,74,000</span>
+          <!-- Fuel Type & Reg Year -->
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label for="vehicle-fuel" class="block text-xs font-semibold text-slate-600 mb-1">Fuel Type</label>
+              <select id="vehicle-fuel" onchange="recalculateQuotes()" class="w-full text-xs font-medium bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-slate-800 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                <option value="petrol">Petrol</option>
+                <option value="diesel">Diesel</option>
+                <option value="cng">CNG (Bi-fuel)</option>
+                <option value="electric">Electric (EV)</option>
+              </select>
+            </div>
+            <div>
+              <label for="vehicle-year" class="block text-xs font-semibold text-slate-600 mb-1">Registration Year</label>
+              <select id="vehicle-year" onchange="onYearChange()" class="w-full text-xs font-medium bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-slate-800 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                <option value="2026">2026 (Brand New)</option>
+                <option value="2025">2025 (1 Year Old)</option>
+                <option value="2024" selected>2024 (2 Years Old)</option>
+                <option value="2023">2023 (3 Years Old)</option>
+                <option value="2022">2022 (4 Years Old)</option>
+                <option value="2021">2021 (5 Years Old)</option>
+                <option value="2020">2020 (6 Years Old)</option>
+                <option value="2018">2018 (8 Years Old)</option>
+                <option value="2015">2015 (11 Years Old)</option>
+              </select>
+            </div>
           </div>
         </div>
 
-        <!-- Plan Type Selection -->
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-          <h3 class="text-sm font-bold text-slate-900 mb-3">Coverage Type</h3>
-          <div class="grid grid-cols-1 gap-2.5">
-            <label class="flex items-center p-3 rounded-lg border border-indigo-200 bg-indigo-50/50 cursor-pointer hover:bg-indigo-50 transition">
-              <input type="radio" name="planType" value="comprehensive" checked class="text-indigo-600 focus:ring-indigo-500 h-4 w-4" />
-              <div class="ml-3">
-                <span class="block text-xs font-bold text-slate-900">Comprehensive Package</span>
-                <span class="block text-[11px] text-slate-500">Own Damage + Mandatory 3rd-Party Cover</span>
+        <!-- SECTION 2: Coverage, IDV & NCB -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
+              <span class="w-2 h-3.5 bg-blue-600 rounded-xs inline-block"></span>
+              2. Coverage & IDV Setup
+            </h2>
+            <button type="button" onclick="showIdvExplainModal()" class="text-[11px] text-brand-600 font-semibold hover:underline">How IDV Works</button>
+          </div>
+
+          <!-- Policy Type Options -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Policy Type</label>
+            <div class="grid grid-cols-3 gap-2">
+              <button type="button" onclick="setPolicyType('comprehensive')" id="btn-comp" class="p-2.5 text-left rounded-xl border border-brand-500 bg-brand-50/70 text-brand-900 transition">
+                <div class="text-xs font-bold">Comprehensive</div>
+                <div class="text-[10px] text-slate-500 mt-0.5">OD + Third Party</div>
+              </button>
+              <button type="button" onclick="setPolicyType('tp')" id="btn-tp" class="p-2.5 text-left rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 transition">
+                <div class="text-xs font-bold">Third Party Only</div>
+                <div class="text-[10px] text-slate-500 mt-0.5">Mandatory legal</div>
+              </button>
+              <button type="button" onclick="setPolicyType('od')" id="btn-od" class="p-2.5 text-left rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 transition">
+                <div class="text-xs font-bold">Standalone OD</div>
+                <div class="text-[10px] text-slate-500 mt-0.5">Own Damage only</div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Dynamic IDV Slider -->
+          <div id="idv-box" class="transition-opacity">
+            <div class="flex items-center justify-between mb-1">
+              <div>
+                <label for="idv-slider" class="text-xs font-semibold text-slate-700">Insured Declared Value (IDV)</label>
+                <p class="text-[10px] text-slate-400">Sum insured paid in case of total loss or theft</p>
               </div>
-            </label>
-            <label class="flex items-center p-3 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
-              <input type="radio" name="planType" value="tp_only" class="text-indigo-600 focus:ring-indigo-500 h-4 w-4" />
-              <div class="ml-3">
-                <span class="block text-xs font-bold text-slate-900">Third-Party (TP) Only</span>
-                <span class="block text-[11px] text-slate-500">Statutory IRDAI Legal Liability only</span>
-              </div>
-            </label>
-            <label class="flex items-center p-3 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
-              <input type="radio" name="planType" value="od_only" class="text-indigo-600 focus:ring-indigo-500 h-4 w-4" />
-              <div class="ml-3">
-                <span class="block text-xs font-bold text-slate-900">Standalone Own Damage (OD)</span>
-                <span class="block text-[11px] text-slate-500">For vehicles with an existing valid TP cover</span>
-              </div>
-            </label>
+              <span id="idv-val-display" class="font-mono text-xs font-bold text-slate-900 bg-slate-100 px-2 py-1 rounded border border-slate-200">₹7,20,000</span>
+            </div>
+            
+            <input 
+              type="range" 
+              id="idv-slider" 
+              min="300000" 
+              max="1500000" 
+              step="5000" 
+              value="720000" 
+              oninput="onIdvChange(this.value)" 
+              class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer"
+            >
+            
+            <div class="flex justify-between items-center text-[10px] text-slate-400 mt-1 font-mono">
+              <span id="idv-min-lbl">Min: ₹4,50,000</span>
+              <button type="button" onclick="resetToRecommendedIdv()" class="text-brand-600 font-sans font-semibold hover:underline">Recommended</button>
+              <span id="idv-max-lbl">Max: ₹9,20,000</span>
+            </div>
+          </div>
+
+          <!-- No Claim Bonus (NCB) -->
+          <div id="ncb-box" class="transition-opacity">
+            <div class="flex items-center justify-between mb-1.5">
+              <label for="ncb-select" class="text-xs font-semibold text-slate-700">Existing No Claim Bonus (NCB)</label>
+              <span id="ncb-discount-badge" class="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">25% OD Discount</span>
+            </div>
+            <select id="ncb-select" onchange="recalculateQuotes()" class="w-full text-xs font-medium bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-slate-800 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+              <option value="0">0% - New vehicle or claimed during past policy</option>
+              <option value="20">20% - 1 claim-free year</option>
+              <option value="25" selected>25% - 2 consecutive claim-free years</option>
+              <option value="35">35% - 3 consecutive claim-free years</option>
+              <option value="45">45% - 4 consecutive claim-free years</option>
+              <option value="50">50% - 5+ claim-free years (Maximum Discount)</option>
+            </select>
           </div>
         </div>
 
-        <!-- Recommended Add-ons -->
-        <div id="addonsContainer" class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-          <div class="flex items-center justify-between mb-3">
-            <h3 class="text-sm font-bold text-slate-900">Recommended Add-on Riders</h3>
-            <span class="text-[11px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">Optional</span>
+        <!-- SECTION 3: Add-on Riders -->
+        <div id="addons-box" class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-3">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
+            <div>
+              <h2 class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
+                <span class="w-2 h-3.5 bg-emerald-600 rounded-xs inline-block"></span>
+                3. Add-on Protection Riders
+              </h2>
+              <p class="text-[10px] text-slate-400 mt-0.5">Customize claim payouts without unexpected deductions</p>
+            </div>
+            <button type="button" onclick="toggleSelectAllAddons()" class="text-xs text-brand-600 font-semibold hover:underline">Select All</button>
           </div>
 
-          <div class="space-y-3">
-            <!-- Zero Dep -->
-            <label class="flex items-start justify-between p-2.5 rounded-lg border border-slate-100 hover:border-slate-200 bg-slate-50/70 hover:bg-white cursor-pointer transition">
-              <div class="flex items-start">
-                <input type="checkbox" id="addonZeroDep" checked class="mt-0.5 rounded text-indigo-600 focus:ring-indigo-500 h-4 w-4" />
-                <div class="ml-2.5">
-                  <span class="block text-xs font-bold text-slate-900">Zero Depreciation (Bumper-to-Bumper)</span>
-                  <span class="block text-[10px] text-slate-500">100% reimbursement for plastic, rubber & metal parts</span>
+          <div class="space-y-2">
+            <!-- Addon: Zero Dep -->
+            <label class="flex items-start gap-3 p-2.5 rounded-xl border border-slate-200 hover:border-brand-300 bg-slate-50/60 cursor-pointer transition">
+              <input type="checkbox" id="addon-zerodep" checked onchange="recalculateQuotes()" class="mt-0.5 h-4 w-4 rounded text-brand-600 focus:ring-brand-500 border-slate-300">
+              <div class="flex-1 text-xs">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-slate-800">Zero Depreciation (Bumper to Bumper)</span>
+                  <span class="font-mono text-slate-700 font-semibold text-[11px]">+ ~₹2,400</span>
                 </div>
+                <p class="text-slate-500 text-[10px] mt-0.5">Full claim value for plastic, fiber, metal & glass without age depreciation.</p>
               </div>
             </label>
 
-            <!-- Engine Protect -->
-            <label class="flex items-start justify-between p-2.5 rounded-lg border border-slate-100 hover:border-slate-200 bg-slate-50/70 hover:bg-white cursor-pointer transition">
-              <div class="flex items-start">
-                <input type="checkbox" id="addonEngineProtect" checked class="mt-0.5 rounded text-indigo-600 focus:ring-indigo-500 h-4 w-4" />
-                <div class="ml-2.5">
-                  <span class="block text-xs font-bold text-slate-900">Engine & Gearbox Protection</span>
-                  <span class="block text-[10px] text-slate-500">Water ingression (hydrostatic lock) and oil leakage cover</span>
+            <!-- Addon: Engine & Gearbox Protection -->
+            <label class="flex items-start gap-3 p-2.5 rounded-xl border border-slate-200 hover:border-brand-300 bg-slate-50/60 cursor-pointer transition">
+              <input type="checkbox" id="addon-engine" checked onchange="recalculateQuotes()" class="mt-0.5 h-4 w-4 rounded text-brand-600 focus:ring-brand-500 border-slate-300">
+              <div class="flex-1 text-xs">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-slate-800">Engine & Gearbox Protection</span>
+                  <span class="font-mono text-slate-700 font-semibold text-[11px]">+ ~₹820</span>
                 </div>
+                <p class="text-slate-500 text-[10px] mt-0.5">Covers hydrostatic lock and oil seepage repair during floods and monsoon driving.</p>
               </div>
             </label>
 
-            <!-- Roadside Assistance -->
-            <label class="flex items-start justify-between p-2.5 rounded-lg border border-slate-100 hover:border-slate-200 bg-slate-50/70 hover:bg-white cursor-pointer transition">
-              <div class="flex items-start">
-                <input type="checkbox" id="addonRSA" checked class="mt-0.5 rounded text-indigo-600 focus:ring-indigo-500 h-4 w-4" />
-                <div class="ml-2.5">
-                  <span class="block text-xs font-bold text-slate-900">24x7 Roadside Assistance (RSA)</span>
-                  <span class="block text-[10px] text-slate-500">Flat tyre, battery jump-start, minor breakdown, emergency fuel</span>
+            <!-- Addon: 24x7 RSA -->
+            <label class="flex items-start gap-3 p-2.5 rounded-xl border border-slate-200 hover:border-brand-300 bg-slate-50/60 cursor-pointer transition">
+              <input type="checkbox" id="addon-rsa" checked onchange="recalculateQuotes()" class="mt-0.5 h-4 w-4 rounded text-brand-600 focus:ring-brand-500 border-slate-300">
+              <div class="flex-1 text-xs">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-slate-800">24x7 Roadside Assistance (RSA)</span>
+                  <span class="font-mono text-slate-700 font-semibold text-[11px]">+ ~₹299</span>
                 </div>
+                <p class="text-slate-500 text-[10px] mt-0.5">Emergency towing, battery jumpstart, fuel assistance, and puncture repair across India.</p>
               </div>
             </label>
 
-            <!-- Return to Invoice -->
-            <label class="flex items-start justify-between p-2.5 rounded-lg border border-slate-100 hover:border-slate-200 bg-slate-50/70 hover:bg-white cursor-pointer transition">
-              <div class="flex items-start">
-                <input type="checkbox" id="addonRTI" class="mt-0.5 rounded text-indigo-600 focus:ring-indigo-500 h-4 w-4" />
-                <div class="ml-2.5">
-                  <span class="block text-xs font-bold text-slate-900">Return to Invoice (RTI)</span>
-                  <span class="block text-[10px] text-slate-500">Pays on-road price in case of total loss or theft</span>
+            <!-- Addon: RTI -->
+            <label class="flex items-start gap-3 p-2.5 rounded-xl border border-slate-200 hover:border-brand-300 bg-slate-50/60 cursor-pointer transition">
+              <input type="checkbox" id="addon-rti" onchange="recalculateQuotes()" class="mt-0.5 h-4 w-4 rounded text-brand-600 focus:ring-brand-500 border-slate-300">
+              <div class="flex-1 text-xs">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-slate-800">Return to Invoice (RTI)</span>
+                  <span class="font-mono text-slate-700 font-semibold text-[11px]">+ ~₹1,500</span>
                 </div>
+                <p class="text-slate-500 text-[10px] mt-0.5">In case of theft or total loss, claim original on-road purchase price including road tax.</p>
               </div>
             </label>
 
-            <!-- Consumables Cover -->
-            <label class="flex items-start justify-between p-2.5 rounded-lg border border-slate-100 hover:border-slate-200 bg-slate-50/70 hover:bg-white cursor-pointer transition">
-              <div class="flex items-start">
-                <input type="checkbox" id="addonConsumables" class="mt-0.5 rounded text-indigo-600 focus:ring-indigo-500 h-4 w-4" />
-                <div class="ml-2.5">
-                  <span class="block text-xs font-bold text-slate-900">Consumables Expenses</span>
-                  <span class="block text-[10px] text-slate-500">Covers engine oil, coolants, nuts, bolts, washers, grease</span>
+            <!-- Addon: Consumables Cover -->
+            <label class="flex items-start gap-3 p-2.5 rounded-xl border border-slate-200 hover:border-brand-300 bg-slate-50/60 cursor-pointer transition">
+              <input type="checkbox" id="addon-consumables" checked onchange="recalculateQuotes()" class="mt-0.5 h-4 w-4 rounded text-brand-600 focus:ring-brand-500 border-slate-300">
+              <div class="flex-1 text-xs">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-slate-800">Consumables Expenses</span>
+                  <span class="font-mono text-slate-700 font-semibold text-[11px]">+ ~₹420</span>
                 </div>
+                <p class="text-slate-500 text-[10px] mt-0.5">Includes cost of engine oil, nuts, bolts, bearings, coolants and AC refrigerant gas.</p>
               </div>
             </label>
 
-            <!-- Key Protect -->
-            <label class="flex items-start justify-between p-2.5 rounded-lg border border-slate-100 hover:border-slate-200 bg-slate-50/70 hover:bg-white cursor-pointer transition">
-              <div class="flex items-start">
-                <input type="checkbox" id="addonKey" class="mt-0.5 rounded text-indigo-600 focus:ring-indigo-500 h-4 w-4" />
-                <div class="ml-2.5">
-                  <span class="block text-xs font-bold text-slate-900">Key Replacement Cover</span>
-                  <span class="block text-[10px] text-slate-500">Covers locksmith & smart key fob replacement costs</span>
+            <!-- Addon: Key Replacement -->
+            <label class="flex items-start gap-3 p-2.5 rounded-xl border border-slate-200 hover:border-brand-300 bg-slate-50/60 cursor-pointer transition">
+              <input type="checkbox" id="addon-key" onchange="recalculateQuotes()" class="mt-0.5 h-4 w-4 rounded text-brand-600 focus:ring-brand-500 border-slate-300">
+              <div class="flex-1 text-xs">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-slate-800">Key Replacement & Locksmith</span>
+                  <span class="font-mono text-slate-700 font-semibold text-[11px]">+ ~₹250</span>
                 </div>
+                <p class="text-slate-500 text-[10px] mt-0.5">Reimburses electronic key fobs and lock assembly replacement costs if keys are lost.</p>
               </div>
             </label>
 
-            <!-- CPA Cover -->
-            <label class="flex items-start justify-between p-2.5 rounded-lg border border-slate-100 hover:border-slate-200 bg-slate-50/70 hover:bg-white cursor-pointer transition">
-              <div class="flex items-start">
-                <input type="checkbox" id="addonCPA" class="mt-0.5 rounded text-indigo-600 focus:ring-indigo-500 h-4 w-4" />
-                <div class="ml-2.5">
-                  <span class="block text-xs font-bold text-slate-900">Owner-Driver PA Cover (₹15 Lakh)</span>
-                  <span class="block text-[10px] text-slate-500">Mandatory personal accident cover (₹375/yr)</span>
+            <!-- Addon: PA Cover -->
+            <label class="flex items-start gap-3 p-2.5 rounded-xl border border-amber-200 bg-amber-50/40 cursor-pointer transition">
+              <input type="checkbox" id="addon-pa" checked onchange="recalculateQuotes()" class="mt-0.5 h-4 w-4 rounded text-amber-600 focus:ring-amber-500 border-amber-300">
+              <div class="flex-1 text-xs">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-amber-900">Compulsory Personal Accident (₹15 Lakh)</span>
+                  <span class="font-mono text-amber-900 font-semibold text-[11px]">₹330</span>
                 </div>
+                <p class="text-amber-800/80 text-[10px] mt-0.5">Mandatory by law for owner-drivers unless you have standalone ₹15L accidental cover.</p>
               </div>
             </label>
           </div>
@@ -278,28 +396,43 @@
 
       </div>
 
-      <!-- Right Column: Insurer Quote Cards -->
-      <div class="lg:col-span-8 space-y-4">
-
-        <!-- Top summary bar -->
-        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-2 border-b border-slate-200">
-          <div>
-            <h2 class="text-lg font-bold text-slate-900">Real-time Insurer Quotes</h2>
-            <p class="text-xs text-slate-500">Showing top IRDAI licensed private & public general insurers</p>
+      <!-- RIGHT COLUMN: Insurer Cards Feed & Direct Outbound Actions (7 Columns) -->
+      <div class="lg:col-span-7 space-y-4">
+        
+        <!-- Filter, Count & Sort Bar -->
+        <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-xs flex flex-wrap items-center justify-between gap-3">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-semibold text-slate-500">Showing</span>
+            <span id="insurer-count-tag" class="bg-slate-900 text-white font-mono text-xs px-2 py-0.5 rounded-full font-bold">7 Insurers</span>
+            <span class="text-xs text-slate-600">for <b id="vehicle-hero-title" class="text-slate-900">Hyundai Creta 1.5 SX</b></span>
           </div>
-          <div class="mt-2 sm:mt-0 flex items-center space-x-2 text-xs">
-            <span class="text-slate-500">Sort by:</span>
-            <select id="sortBy" class="bg-white border border-slate-300 rounded px-2 py-1 text-slate-700 font-medium outline-none">
-              <option value="premium_asc">Lowest Premium</option>
-              <option value="csr_desc">Highest Claim Settlement (CSR)</option>
-              <option value="garages_desc">Most Cashless Garages</option>
+
+          <div class="flex items-center gap-2 ml-auto">
+            <label for="sort-dropdown" class="text-xs font-medium text-slate-500">Sort By:</label>
+            <select id="sort-dropdown" onchange="renderQuoteCards()" class="text-xs font-semibold bg-slate-50 border border-slate-300 rounded-lg py-1.5 px-2.5 text-slate-800 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+              <option value="recommended">Best Overall Value</option>
+              <option value="price_asc">Price: Lowest First</option>
+              <option value="price_desc">Price: Highest First</option>
+              <option value="csr_desc">Claim Settlement Ratio (CSR)</option>
+              <option value="garages_desc">Network Garages (Highest)</option>
             </select>
           </div>
         </div>
 
-        <!-- Quotes List Container -->
-        <div id="quotesContainer" class="space-y-4">
-          <!-- Dynamically Injected Cards -->
+        <!-- Real-Time Quotes Injected Here -->
+        <div id="quotes-feed" class="space-y-4">
+          <!-- Dynamic rendering by JS -->
+        </div>
+
+        <!-- Direct Purchase Disclaimer Card -->
+        <div class="bg-slate-900 text-white rounded-2xl p-5 shadow-sm space-y-2 border border-slate-800">
+          <div class="flex items-center gap-2 text-xs font-bold text-amber-400">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+            Transparent Redirection Policy
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            When clicking <b class="text-white">"Buy on [Company] ↗"</b>, you will be seamlessly redirected to the insurer's official secure portal with your registration number and vehicle parameters pre-filled. You pay directly to the insurance company with zero hidden intermediary fees.
+          </p>
         </div>
 
       </div>
@@ -307,748 +440,1199 @@
     </div>
   </main>
 
-  <!-- Sticky Comparison Tray (When 2+ selected) -->
-  <div id="compareTray" class="fixed bottom-0 inset-x-0 bg-slate-900 text-white py-3.5 px-4 shadow-2xl z-40 transform translate-y-full transition-transform duration-300 ease-out border-t border-slate-800">
-    <div class="max-w-7xl mx-auto flex items-center justify-between">
-      <div class="flex items-center space-x-3">
-        <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span class="text-xs font-medium"><span id="compareCount" class="font-bold text-white">0</span> policies selected for comparison</span>
-        <div id="compareBadges" class="hidden sm:flex items-center space-x-2 ml-4"></div>
-      </div>
-      <div class="flex items-center space-x-3">
-        <button id="clearCompareBtn" class="text-xs text-slate-400 hover:text-white underline">Clear</button>
-        <button id="openCompareModalBtn" class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs px-4 py-2 rounded-lg shadow-md transition">
-          Compare Side-by-Side
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal: Itemized Tax Invoice Breakdown -->
-  <div id="invoiceModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 max-h-[90vh] overflow-y-auto">
-      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+  <!-- MODAL 1: Side-by-Side Comparison Matrix -->
+  <div id="side-by-side-modal" class="fixed inset-0 modal-overlay z-50 hidden flex items-center justify-center p-3 sm:p-5">
+    <div class="bg-white rounded-2xl max-w-5xl w-full max-h-[92vh] overflow-hidden shadow-2xl border border-slate-200 flex flex-col">
+      <div class="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50">
         <div>
-          <h3 class="text-base font-bold text-slate-900" id="invInsurerName">Insurer Name</h3>
-          <p class="text-xs text-slate-500">Premium Calculation & Tax Breakdown</p>
+          <h3 class="font-extrabold text-slate-900 text-base sm:text-lg">Detailed Plan Comparison</h3>
+          <p class="text-xs text-slate-500">Benchmark benefits, claim metrics, and final premiums across chosen insurers.</p>
         </div>
-        <button onclick="closeInvoiceModal()" class="text-slate-400 hover:text-slate-600 text-lg">
-          <i class="fa-solid fa-xmark"></i>
+        <button onclick="closeSideBySideModal()" class="text-slate-400 hover:text-slate-600 p-2 rounded-lg hover:bg-slate-200">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
       </div>
 
-      <div class="py-4 space-y-3 text-xs" id="invoiceDetails">
-        <!-- Rendered dynamically -->
-      </div>
-
-      <div class="border-t border-slate-100 pt-4 flex justify-between items-center">
-        <div class="text-left">
-          <span class="text-xs text-slate-400 block">Total Payable (Inc. GST)</span>
-          <span class="text-xl font-extrabold text-slate-900" id="invTotalAmount">₹ 0</span>
+      <div class="p-4 sm:p-6 overflow-y-auto flex-1">
+        <div id="comparison-table-container" class="overflow-x-auto">
+          <!-- Injected dynamically -->
         </div>
-        <button id="invBuyBtn" class="bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-xs font-bold hover:bg-indigo-700 transition">
-          Continue to Official Site ↗
+      </div>
+
+      <div class="p-4 bg-slate-50 border-t border-slate-100 flex justify-end">
+        <button onclick="closeSideBySideModal()" class="py-2 px-5 bg-slate-800 text-white font-semibold rounded-xl text-xs hover:bg-slate-900 transition">
+          Close Comparison
         </button>
       </div>
     </div>
   </div>
 
-  <!-- Modal: Side-by-Side Comparison -->
-  <div id="comparisonModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-4xl w-full p-6 shadow-2xl border border-slate-200 max-h-[90vh] overflow-y-auto">
-      <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
-        <h3 class="text-base font-bold text-slate-900">Side-by-Side Plan Comparison</h3>
-        <button onclick="closeComparisonModal()" class="text-slate-400 hover:text-slate-600 text-lg">
-          <i class="fa-solid fa-xmark"></i>
+  <!-- MODAL 2: Itemized Tax Invoice Breakdown -->
+  <div id="breakup-modal" class="fixed inset-0 modal-overlay z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-200 flex flex-col">
+      <div class="p-5 border-b border-slate-100 flex items-center justify-between sticky top-0 bg-white z-10">
+        <div class="flex items-center gap-3">
+          <div id="breakup-logo" class="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-xs">LOGO</div>
+          <div>
+            <h3 id="breakup-title" class="font-bold text-slate-900 text-base">HDFC ERGO Premium Quote</h3>
+            <p id="breakup-sub" class="text-xs text-slate-500">Hyundai Creta • IDV: ₹7,20,000</p>
+          </div>
+        </div>
+        <button onclick="closeBreakupModal()" class="text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-slate-100">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
       </div>
-      <div id="comparisonMatrix" class="overflow-x-auto">
-        <!-- Comparison Table Generated dynamically -->
+
+      <div class="p-5 space-y-4 text-xs">
+        
+        <!-- Own Damage Block -->
+        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+          <div class="flex justify-between items-center font-bold text-slate-800 mb-1.5">
+            <span>A. Own Damage (OD) Base Premium</span>
+            <span id="inv-od-base" class="font-mono">₹5,760</span>
+          </div>
+          <div class="flex justify-between text-slate-500 text-[11px] mb-1">
+            <span>Tariff rate calculated on IDV</span>
+            <span id="inv-od-rate">0.80%</span>
+          </div>
+          <div class="flex justify-between text-emerald-600 font-semibold text-[11px]">
+            <span id="inv-ncb-title">Less: No Claim Bonus (NCB 25%)</span>
+            <span id="inv-ncb-amt" class="font-mono">- ₹1,440</span>
+          </div>
+          <div class="border-t border-slate-200 mt-2 pt-1.5 flex justify-between font-bold text-slate-800">
+            <span>Net Own Damage Premium</span>
+            <span id="inv-od-net" class="font-mono">₹4,320</span>
+          </div>
+        </div>
+
+        <!-- Third Party Block -->
+        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+          <div class="flex justify-between items-center font-bold text-slate-800 mb-1">
+            <span>B. Third-Party Liability Statutory Tariff</span>
+            <span id="inv-tp-amt" class="font-mono">₹3,416</span>
+          </div>
+          <p class="text-slate-500 text-[11px]">Fixed statutory rate notified by IRDAI based on engine CC & fuel category.</p>
+        </div>
+
+        <!-- Addons Block -->
+        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+          <div class="flex justify-between items-center font-bold text-slate-800 mb-2">
+            <span>C. Add-on Protection Riders</span>
+            <span id="inv-addons-sum" class="font-mono text-brand-600">₹3,949</span>
+          </div>
+          <div id="inv-addons-items" class="space-y-1.5 text-slate-600 text-[11px]">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+
+        <!-- Totals & GST -->
+        <div class="border-t border-slate-200 pt-3 space-y-2">
+          <div class="flex justify-between text-slate-600">
+            <span>Net Subtotal (A + B + C)</span>
+            <span id="inv-subtotal" class="font-mono font-semibold">₹11,685</span>
+          </div>
+          <div class="flex justify-between text-slate-600">
+            <div>
+              <span>Statutory GST (18%)</span>
+              <span class="text-[10px] text-slate-400 block">CGST 9% (₹1,052) + SGST 9% (₹1,052)</span>
+            </div>
+            <span id="inv-gst" class="font-mono font-semibold text-amber-700">₹2,103</span>
+          </div>
+          <div class="bg-brand-50 border border-brand-200 p-3.5 rounded-xl flex justify-between items-center text-sm font-extrabold text-brand-900 mt-2">
+            <div>
+              <span>Final Payable Amount</span>
+              <span class="block text-[10px] font-normal text-brand-700">Inclusive of all taxes & levies</span>
+            </div>
+            <span id="inv-total" class="font-mono text-lg text-brand-700">₹13,788</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between gap-3">
+        <button onclick="closeBreakupModal()" class="w-1/3 py-2 px-3 border border-slate-300 text-slate-700 font-semibold rounded-xl text-xs hover:bg-slate-100">
+          Close
+        </button>
+        <button id="breakup-redirect-btn" onclick="directRedirectFromModal()" class="w-2/3 py-2 px-3 bg-brand-600 text-white font-semibold rounded-xl text-xs hover:bg-brand-700 shadow flex items-center justify-center gap-1.5">
+          <span>Proceed on Insurer Portal</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- Redirection Toast / Notification -->
-  <div id="redirectToast" class="fixed top-20 right-6 z-50 max-w-sm bg-slate-900 text-white p-4 rounded-xl shadow-2xl border border-slate-700 hidden transform transition-all duration-300">
-    <div class="flex items-start space-x-3">
-      <div class="text-emerald-400 text-lg mt-0.5">
-        <i class="fa-solid fa-circle-arrow-up-right"></i>
+  <!-- MODAL 3: Reassurance Outbound Redirection Screen -->
+  <div id="redirect-modal" class="fixed inset-0 modal-overlay z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 text-center shadow-2xl border border-slate-200">
+      <div class="w-14 h-14 rounded-2xl bg-brand-50 text-brand-600 mx-auto flex items-center justify-center mb-3">
+        <svg class="w-7 h-7 animate-spin text-brand-600" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
       </div>
-      <div>
-        <h4 class="text-xs font-bold" id="toastTitle">Redirecting to Insurer Portal...</h4>
-        <p class="text-[11px] text-slate-300 mt-0.5" id="toastDesc">Opening official website in a new window with your prefilled vehicle credentials.</p>
+      <h3 class="text-base font-bold text-slate-900">Connecting to <span id="redirect-insurer-name" class="text-brand-600">Insurer</span></h3>
+      <p id="redirect-detail" class="text-xs text-slate-500 mt-1">Pre-populating your vehicle registration and quote parameters...</p>
+
+      <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 my-4 text-left text-xs space-y-1.5 font-mono">
+        <div class="flex justify-between">
+          <span class="text-slate-500">Vehicle Reg:</span>
+          <span class="font-bold text-slate-800" id="redirect-reg-no">UP14AB1234</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-500">Target URL:</span>
+          <span class="text-[10px] text-brand-600 truncate max-w-[200px]" id="redirect-target-url">https://www.hdfcergo.com</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-500">Security:</span>
+          <span class="text-emerald-700 font-sans font-bold">256-Bit Official SSL Gateway</span>
+        </div>
+      </div>
+
+      <div class="flex gap-2">
+        <button onclick="abortRedirect()" class="w-1/2 py-2 rounded-xl border border-slate-300 text-xs font-semibold text-slate-700 hover:bg-slate-100">
+          Cancel
+        </button>
+        <button id="redirect-now-btn" onclick="executePendingRedirect()" class="w-1/2 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-xs font-semibold text-white shadow-sm flex items-center justify-center gap-1">
+          <span>Go Now</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </button>
       </div>
     </div>
   </div>
 
-  <footer class="bg-white border-t border-slate-200 py-6 mt-12 text-center text-xs text-slate-500">
-    <div class="max-w-7xl mx-auto px-4">
-      <p class="mb-1 font-medium text-slate-600">Disclaimer & Regulatory Notice</p>
-      <p class="max-w-3xl mx-auto leading-relaxed text-[11px]">
-        Third-Party (TP) rates are governed by IRDAI tariff schedules. Own damage and add-on rates are algorithmic estimates based on public underwriting models. Clicking "Buy Now" routes you directly to the insurer's registered portal where policy confirmation, KYC verification, and direct digital premium payment take place.
+  <!-- MODAL 4: IDV Explainer -->
+  <div id="idv-modal" class="fixed inset-0 modal-overlay z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200">
+      <div class="flex justify-between items-center mb-2">
+        <h3 class="text-base font-bold text-slate-900">How is Vehicle IDV Determined?</h3>
+        <button onclick="document.getElementById('idv-modal').classList.add('hidden')" class="text-slate-400 hover:text-slate-700">✕</button>
+      </div>
+      <p class="text-xs text-slate-600 leading-relaxed mb-3">
+        <b>IDV (Insured Declared Value)</b> represents the maximum current market value of your vehicle that the insurer will pay out in the event of theft or constructive total damage.
       </p>
+      <div class="text-xs space-y-2 bg-slate-50 p-3 rounded-xl border border-slate-200 mb-4 font-mono">
+        <div class="font-sans font-semibold text-slate-800 text-[11px]">IRDAI Standard Vehicle Depreciation:</div>
+        <div class="flex justify-between text-[11px] text-slate-600"><span>Up to 6 months old:</span><span>5%</span></div>
+        <div class="flex justify-between text-[11px] text-slate-600"><span>6 months to 1 year:</span><span>15%</span></div>
+        <div class="flex justify-between text-[11px] text-slate-600"><span>1 year to 2 years:</span><span>20%</span></div>
+        <div class="flex justify-between text-[11px] text-slate-600"><span>2 years to 3 years:</span><span>30%</span></div>
+        <div class="flex justify-between text-[11px] text-slate-600"><span>3 years to 4 years:</span><span>40%</span></div>
+        <div class="flex justify-between text-[11px] text-slate-600"><span>4 years to 5 years:</span><span>50%</span></div>
+      </div>
+      <button onclick="document.getElementById('idv-modal').classList.add('hidden')" class="w-full py-2 bg-slate-800 text-white rounded-xl text-xs font-semibold hover:bg-slate-900">
+        Understood
+      </button>
     </div>
-  </footer>
+  </div>
 
-  <!-- Core JavaScript Logic -->
+  <!-- MODAL 5: Claims FAQ -->
+  <div id="faq-modal" class="fixed inset-0 modal-overlay z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full max-h-[85vh] overflow-y-auto p-6 shadow-2xl border border-slate-200 space-y-4">
+      <div class="flex justify-between items-center">
+        <h3 class="text-base font-bold text-slate-900">Motor Insurance Claim & Buying Guide</h3>
+        <button onclick="document.getElementById('faq-modal').classList.add('hidden')" class="text-slate-400 hover:text-slate-700">✕</button>
+      </div>
+      <div class="space-y-3 text-xs">
+        <div class="border border-slate-200 rounded-xl p-3 bg-slate-50">
+          <h4 class="font-bold text-slate-800">What is Claim Settlement Ratio (CSR)?</h4>
+          <p class="text-slate-600 mt-1">CSR represents the percentage of claims paid out against total claims received by an insurer in a financial year as published by IRDAI. Ratios exceeding 96% reflect superior claim reliability.</p>
+        </div>
+        <div class="border border-slate-200 rounded-xl p-3 bg-slate-50">
+          <h4 class="font-bold text-slate-800">Can I transfer my NCB when switching insurers?</h4>
+          <p class="text-slate-600 mt-1">Yes! NCB belongs to you (the vehicle owner), not the insurance company. You can transfer up to 50% NCB bonus seamlessly to any insurer by producing your renewal notice or NCB retention letter.</p>
+        </div>
+        <div class="border border-slate-200 rounded-xl p-3 bg-slate-50">
+          <h4 class="font-bold text-slate-800">Why buy directly on the insurer's portal?</h4>
+          <p class="text-slate-600 mt-1">Direct company portals eliminate third-party commission surcharges and grant direct access to the insurer's mobile app claims network, roadside tracking, and dedicated claim officers.</p>
+        </div>
+      </div>
+      <button onclick="document.getElementById('faq-modal').classList.add('hidden')" class="w-full py-2 bg-slate-800 text-white rounded-xl text-xs font-semibold hover:bg-slate-900">
+        Close Guide
+      </button>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="fixed bottom-5 right-5 bg-slate-900 text-white text-xs px-4 py-3 rounded-xl shadow-2xl z-50 flex items-center gap-2 transform translate-y-24 opacity-0 transition-all duration-300">
+    <span id="toast-icon">✓</span>
+    <span id="toast-message">Notification message</span>
+  </div>
+
   <script>
-    // 1. Static Insurer Configurations & Direct Outbound Target URLs
+    // Database of Indian Non-Life Motor Insurers with direct official portals
     const INSURERS = [
       {
-        id: "digit",
-        name: "Go Digit General Insurance",
-        shortName: "Digit",
-        logoBadge: "bg-amber-500",
-        csr: "99.1%",
-        cashlessGarages: 6000,
-        tat: "94% settled in 24 hrs",
-        baseOdMultiplier: 0.0165,
+        id: 'hdfc_ergo',
+        name: 'HDFC ERGO',
+        fullName: 'HDFC ERGO General Insurance Co.',
         rating: 4.8,
-        features: ["Paperless instant claims", "Zero inspection for renewals", "Advance cash payout"],
-        websiteBaseUrl: "https://www.godigit.com/motor-insurance/car-insurance"
+        reviewsCount: '86k',
+        csr: 98.4, // Claim Settlement Ratio %
+        garages: 11400,
+        tatHours: 4,
+        badge: 'Top Rated Insurer',
+        badgeClass: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+        logoBg: 'bg-red-50 text-red-600 border-red-200',
+        logoText: 'HDFC',
+        odMultiplier: 0.0078,
+        rsaCost: 299,
+        zeroDepPct: 0.0042,
+        engineProtectCost: 799,
+        rtiPct: 0.0028,
+        consumablesCost: 450,
+        keyCost: 250,
+        perks: ['Instant 30-min claims via app', 'Zero paper renewal', 'Unlimited Zero Dep claims'],
+        portalUrl: 'https://www.hdfcergo.com/car-insurance'
       },
       {
-        id: "hdfc_ergo",
-        name: "HDFC ERGO General Insurance",
-        shortName: "HDFC ERGO",
-        logoBadge: "bg-red-600",
-        csr: "98.2%",
-        cashlessGarages: 8200,
-        tat: "Overnight repair guarantee",
-        baseOdMultiplier: 0.0175,
+        id: 'icici_lombard',
+        name: 'ICICI Lombard',
+        fullName: 'ICICI Lombard General Insurance',
         rating: 4.7,
-        features: ["Largest garage network", "Dedicated claims officer", "Instant online endorsement"],
-        websiteBaseUrl: "https://www.hdfcergo.com/car-insurance"
+        reviewsCount: '95k',
+        csr: 97.9,
+        garages: 10800,
+        tatHours: 6,
+        badge: 'Largest Network',
+        badgeClass: 'bg-amber-50 text-amber-700 border-amber-200',
+        logoBg: 'bg-orange-50 text-orange-700 border-orange-200',
+        logoText: 'ICICI',
+        odMultiplier: 0.0076,
+        rsaCost: 350,
+        zeroDepPct: 0.0040,
+        engineProtectCost: 820,
+        rtiPct: 0.0029,
+        consumablesCost: 420,
+        keyCost: 280,
+        perks: ['Doorstep vehicle pickup & drop', 'InstaSpect video inspection', '6-month repair warranty'],
+        portalUrl: 'https://www.icicilombard.com/motor-insurance/car-insurance'
       },
       {
-        id: "icici_lombard",
-        name: "ICICI Lombard General Insurance",
-        shortName: "ICICI Lombard",
-        logoBadge: "bg-orange-600",
-        csr: "97.8%",
-        cashlessGarages: 7500,
-        tat: "IL Take Care instant video claims",
-        baseOdMultiplier: 0.0180,
+        id: 'tata_aig',
+        name: 'Tata AIG',
+        fullName: 'Tata AIG General Insurance',
+        rating: 4.7,
+        reviewsCount: '65k',
+        csr: 97.1,
+        garages: 9200,
+        tatHours: 8,
+        badge: 'Trusted Heritage',
+        badgeClass: 'bg-blue-50 text-blue-700 border-blue-200',
+        logoBg: 'bg-blue-50 text-blue-800 border-blue-200',
+        logoText: 'TATA',
+        odMultiplier: 0.0075,
+        rsaCost: 320,
+        zeroDepPct: 0.0039,
+        engineProtectCost: 780,
+        rtiPct: 0.0026,
+        consumablesCost: 400,
+        keyCost: 260,
+        perks: ['Tata Trust Assurance', 'Auto-Locksmith in 60 mins', '14 Custom Riders'],
+        portalUrl: 'https://www.tataaig.com/car-insurance'
+      },
+      {
+        id: 'bajaj_allianz',
+        name: 'Bajaj Allianz',
+        fullName: 'Bajaj Allianz General Insurance',
         rating: 4.6,
-        features: ["Instant claim approval via App", "Pick-up & drop support", "Towing assistance up to 50km"],
-        websiteBaseUrl: "https://www.icicilombard.com/motor-insurance/car-insurance"
+        reviewsCount: '73k',
+        csr: 97.5,
+        garages: 9600,
+        tatHours: 7,
+        badge: 'Fast Settlement',
+        badgeClass: 'bg-cyan-50 text-cyan-700 border-cyan-200',
+        logoBg: 'bg-cyan-50 text-cyan-800 border-cyan-200',
+        logoText: 'BAJAJ',
+        odMultiplier: 0.0077,
+        rsaCost: 340,
+        zeroDepPct: 0.0041,
+        engineProtectCost: 850,
+        rtiPct: 0.0030,
+        consumablesCost: 440,
+        keyCost: 290,
+        perks: ['Motor OTS on-the-spot app claims', 'DriveSmart telematics', 'Zero excess option'],
+        portalUrl: 'https://www.bajajallianz.com/motor-insurance/car-insurance.html'
       },
       {
-        id: "tata_aig",
-        name: "Tata AIG General Insurance",
-        shortName: "Tata AIG",
-        logoBadge: "bg-blue-600",
-        csr: "99.0%",
-        cashlessGarages: 7100,
-        tat: "Auto-Restore claims network",
-        baseOdMultiplier: 0.0170,
+        id: 'go_digit',
+        name: 'Digit Insurance',
+        fullName: 'Go Digit General Insurance',
         rating: 4.8,
-        features: ["Auto-repair warranty", "High satisfaction index", "OEM parts assurance"],
-        websiteBaseUrl: "https://www.tataaig.com/car-insurance"
+        reviewsCount: '115k',
+        csr: 96.8,
+        garages: 8200,
+        tatHours: 3,
+        badge: 'Customer Choice',
+        badgeClass: 'bg-purple-50 text-purple-700 border-purple-200',
+        logoBg: 'bg-yellow-50 text-amber-700 border-amber-200',
+        logoText: 'DIGIT',
+        odMultiplier: 0.0070,
+        rsaCost: 250,
+        zeroDepPct: 0.0037,
+        engineProtectCost: 720,
+        rtiPct: 0.0025,
+        consumablesCost: 390,
+        keyCost: 220,
+        perks: ['Zero paper claims on mobile', 'Smartphone inspection in 7 mins', '100% cashless claims'],
+        portalUrl: 'https://www.godigit.com/motor-insurance/car-insurance'
       },
       {
-        id: "bajaj_allianz",
-        name: "Bajaj Allianz General Insurance",
-        shortName: "Bajaj Allianz",
-        logoBadge: "bg-blue-800",
-        csr: "98.5%",
-        cashlessGarages: 6800,
-        tat: "Motor OTS (On-the-spot app claims)",
-        baseOdMultiplier: 0.0172,
+        id: 'sbi_general',
+        name: 'SBI General',
+        fullName: 'SBI General Insurance Co. Ltd.',
         rating: 4.5,
-        features: ["Motor OTS settlement up to ₹30k", "DriveSmart telematics", "Doorstep pickup"],
-        websiteBaseUrl: "https://www.bajajallianz.com/motor-insurance/car-insurance.html"
+        reviewsCount: '48k',
+        csr: 96.1,
+        garages: 7500,
+        tatHours: 10,
+        badge: 'Lowest Premium',
+        badgeClass: 'bg-indigo-50 text-indigo-700 border-indigo-200',
+        logoBg: 'bg-indigo-50 text-indigo-700 border-indigo-200',
+        logoText: 'SBI',
+        odMultiplier: 0.0068,
+        rsaCost: 310,
+        zeroDepPct: 0.0038,
+        engineProtectCost: 740,
+        rtiPct: 0.0024,
+        consumablesCost: 380,
+        keyCost: 240,
+        perks: ['India largest banking trust', 'Deep Tier-2/3 network reach', 'Special EV discounts'],
+        portalUrl: 'https://www.sbigeneral.in/portal/motor-insurance/car-insurance'
       },
       {
-        id: "sbi_general",
-        name: "SBI General Insurance",
-        shortName: "SBI General",
-        logoBadge: "bg-indigo-800",
-        csr: "95.6%",
-        cashlessGarages: 5000,
-        tat: "Standard 3-day turnaround",
-        baseOdMultiplier: 0.0155,
-        rating: 4.3,
-        features: ["State Bank reliability", "Economical rates", "Widespread tier-2/3 coverage"],
-        websiteBaseUrl: "https://www.sbigeneral.in/portal/motor-insurance"
-      },
-      {
-        id: "reliance_general",
-        name: "Reliance General Insurance",
-        shortName: "Reliance Gen",
-        logoBadge: "bg-red-700",
-        csr: "96.4%",
-        cashlessGarages: 5400,
-        tat: "Rapid claims assistance",
-        baseOdMultiplier: 0.0160,
-        rating: 4.4,
-        features: ["Free emergency fuel delivery", "Doorstep towing", "Quick digital claim intimation"],
-        websiteBaseUrl: "https://www.reliancegeneral.co.in/Insurance/Motor-Insurance/Car-Insurance.aspx"
+        id: 'reliance_general',
+        name: 'Reliance General',
+        fullName: 'Reliance General Insurance',
+        rating: 4.5,
+        reviewsCount: '52k',
+        csr: 96.4,
+        garages: 7900,
+        tatHours: 8,
+        badge: 'Instant Renewal',
+        badgeClass: 'bg-teal-50 text-teal-700 border-teal-200',
+        logoBg: 'bg-teal-50 text-teal-700 border-teal-200',
+        logoText: 'REL',
+        odMultiplier: 0.0071,
+        rsaCost: 290,
+        zeroDepPct: 0.0038,
+        engineProtectCost: 750,
+        rtiPct: 0.0025,
+        consumablesCost: 400,
+        keyCost: 250,
+        perks: ['Free towing up to 50 km', 'Live tracking of surveyor', 'Video-based claim approvals'],
+        portalUrl: 'https://www.reliancegeneral.co.in/Insurance/Motor-Insurance/Car-Insurance.aspx'
       }
     ];
 
-    // 2. IRDAI Statutory Motor Third-Party (TP) Tariffs (in INR)
-    function getIRDAIThirdPartyTariff(vehicleCC, fuel) {
-      if (fuel === "Two-Wheeler") {
-        if (vehicleCC <= 75) return 538;
-        if (vehicleCC <= 150) return 714;
-        if (vehicleCC <= 350) return 1366;
-        return 2804;
+    // Vehicles Catalog
+    const VEHICLES_DATABASE = {
+      car: {
+        makes: {
+          'Hyundai': [
+            { name: 'Creta 1.5 SX', exShowroom: 1520000, cc: 1497, fuel: 'petrol' },
+            { name: 'Venue 1.2 Kappa', exShowroom: 980000, cc: 1197, fuel: 'petrol' },
+            { name: 'i20 Asta', exShowroom: 910000, cc: 1197, fuel: 'petrol' },
+            { name: 'Ioniq 5 EV', exShowroom: 4600000, cc: 0, fuel: 'electric' }
+          ],
+          'Maruti Suzuki': [
+            { name: 'Swift ZXi', exShowroom: 840000, cc: 1197, fuel: 'petrol' },
+            { name: 'Baleno Alpha', exShowroom: 950000, cc: 1197, fuel: 'petrol' },
+            { name: 'Brezza ZXi', exShowroom: 1150000, cc: 1462, fuel: 'petrol' },
+            { name: 'Grand Vitara Hybrid', exShowroom: 1880000, cc: 1490, fuel: 'petrol' }
+          ],
+          'Tata Motors': [
+            { name: 'Nexon Creative', exShowroom: 1180000, cc: 1199, fuel: 'petrol' },
+            { name: 'Nexon EV Empowered', exShowroom: 1780000, cc: 0, fuel: 'electric' },
+            { name: 'Harrier Fearless', exShowroom: 2420000, cc: 1956, fuel: 'diesel' },
+            { name: 'Punch Adventure CNG', exShowroom: 795000, cc: 1199, fuel: 'cng' }
+          ],
+          'Mahindra': [
+            { name: 'XUV700 AX7', exShowroom: 2280000, cc: 1997, fuel: 'petrol' },
+            { name: 'Scorpio-N Z8L', exShowroom: 2150000, cc: 2184, fuel: 'diesel' },
+            { name: 'Thar 4x4 Hard Top', exShowroom: 1720000, cc: 1997, fuel: 'petrol' }
+          ]
+        },
+        defaultMake: 'Hyundai',
+        defaultIdx: 0
+      },
+      bike: {
+        makes: {
+          'Royal Enfield': [
+            { name: 'Classic 350', exShowroom: 220000, cc: 349, fuel: 'petrol' },
+            { name: 'Hunter 350', exShowroom: 178000, cc: 349, fuel: 'petrol' },
+            { name: 'Himalayan 450', exShowroom: 298000, cc: 452, fuel: 'petrol' }
+          ],
+          'Honda': [
+            { name: 'Activa 6G DLX', exShowroom: 84000, cc: 109, fuel: 'petrol' },
+            { name: 'Shine 125', exShowroom: 86000, cc: 124, fuel: 'petrol' },
+            { name: 'CB350 Hness', exShowroom: 215000, cc: 348, fuel: 'petrol' }
+          ],
+          'TVS': [
+            { name: 'Jupiter 110', exShowroom: 81000, cc: 113, fuel: 'petrol' },
+            { name: 'Apache RTR 160 4V', exShowroom: 138000, cc: 159, fuel: 'petrol' },
+            { name: 'iQube Electric', exShowroom: 142000, cc: 0, fuel: 'electric' }
+          ],
+          'Ather Energy': [
+            { name: '450X Gen 3', exShowroom: 155000, cc: 0, fuel: 'electric' },
+            { name: 'Rizta Z', exShowroom: 148000, cc: 0, fuel: 'electric' }
+          ]
+        },
+        defaultMake: 'Royal Enfield',
+        defaultIdx: 0
+      },
+      commercial: {
+        makes: {
+          'Tata Commercial': [
+            { name: 'Ace Gold (Chota Hathi)', exShowroom: 540000, cc: 700, fuel: 'diesel' },
+            { name: 'Intra V30 Pick-up', exShowroom: 850000, cc: 1496, fuel: 'diesel' }
+          ],
+          'Mahindra Commercial': [
+            { name: 'Bolero Maxi Truck Plus', exShowroom: 780000, cc: 2523, fuel: 'diesel' },
+            { name: 'Supro Profit Truck', exShowroom: 640000, cc: 909, fuel: 'diesel' }
+          ]
+        },
+        defaultMake: 'Tata Commercial',
+        defaultIdx: 0
       }
-      if (fuel === "EV") {
-        return 1780; // Electric Private Car concession
-      }
-      // Private 4-Wheeler CC slabs
-      if (vehicleCC <= 1000) return 2094;
-      if (vehicleCC <= 1500) return 3416;
-      return 7897;
-    }
-
-    // 3. State Management
-    let selectedVehData = {
-      regNo: "UP14AB1234",
-      modelName: "Maruti Brezza",
-      exShowroom: 950000,
-      cc: 1462,
-      fuel: "Petrol",
-      year: 2024,
-      ncb: 0.20,
-      idv: 760000,
-      planType: "comprehensive"
     };
 
-    let comparisonList = [];
+    // State mapping for RTO lookup
+    const RTO_MAP = {
+      'UP14': 'Ghaziabad, Uttar Pradesh',
+      'UP16': 'Noida / Greater Noida, UP',
+      'UP32': 'Lucknow, Uttar Pradesh',
+      'DL01': 'Delhi Mall Road (North Delhi)',
+      'DL04': 'Delhi Janakpuri (West Delhi)',
+      'DL08': 'Delhi Wazirpur (North-West)',
+      'MH01': 'Mumbai South, Maharashtra',
+      'MH02': 'Mumbai West (Andheri), MH',
+      'MH12': 'Pune City, Maharashtra',
+      'KA01': 'Koramangala, Bengaluru, KA',
+      'KA03': 'Indiranagar, Bengaluru, KA',
+      'KA05': 'Jayanagar, Bengaluru, KA',
+      'TN01': 'Chennai North, Tamil Nadu',
+      'TN07': 'Chennai South, Tamil Nadu',
+      'TS09': 'Hyderabad Central, Telangana',
+      'GJ01': 'Ahmedabad City, Gujarat',
+      'HR26': 'Gurugram, Haryana',
+      'WB01': 'Kolkata North, West Bengal'
+    };
 
-    // 4. Depreciation Table for Baseline IDV
-    function calculateDepreciation(regYear) {
-      const age = 2026 - parseInt(regYear);
-      if (age <= 0) return 0.05; // Brand new: 5%
-      if (age === 1) return 0.15; // Up to 1 yr: 15%
-      if (age === 2) return 0.20; // Up to 2 yrs: 20%
-      if (age === 3) return 0.30; // Up to 3 yrs: 30%
-      if (age === 4) return 0.40; // Up to 4 yrs: 40%
-      return 0.50; // 5+ years: 50%
+    // Application state
+    let state = {
+      category: 'car',
+      policyType: 'comprehensive',
+      registrationNumber: 'UP14AB1234',
+      currentIdv: 720000,
+      recommendedIdv: 720000,
+      selectedCompare: ['hdfc_ergo', 'icici_lombard'],
+      computedQuotes: [],
+      modalQuoteId: null,
+      pendingRedirectUrl: null,
+      redirectTimeout: null
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      populateMakes();
+      onMakeChange();
+      recalculateQuotes();
+    });
+
+    function setVehicleCategory(cat) {
+      state.category = cat;
+      
+      ['car', 'bike', 'commercial'].forEach(c => {
+        const btn = document.getElementById(`cat-${c}-btn`);
+        if (c === cat) {
+          btn.className = 'cat-btn py-2 text-xs font-bold rounded-lg transition-all shadow-xs bg-white text-brand-700 flex items-center justify-center gap-1.5';
+        } else {
+          btn.className = 'cat-btn py-2 text-xs font-medium rounded-lg transition-all text-slate-600 hover:text-slate-900 flex items-center justify-center gap-1.5';
+        }
+      });
+
+      document.getElementById('vehicle-type-label').innerText = cat === 'car' ? 'Private Car' : cat === 'bike' ? 'Two-Wheeler' : 'Commercial Vehicle';
+
+      populateMakes();
+      onMakeChange();
+      recalculateQuotes();
     }
 
-    function syncVehicleStateFromForm() {
-      const modelSelect = document.getElementById("vehicleModel");
-      const selectedOption = modelSelect.options[modelSelect.selectedIndex];
-      const exShowroom = parseFloat(selectedOption.getAttribute("data-exshowroom"));
-      const cc = parseInt(selectedOption.getAttribute("data-cc"));
-      const fuel = selectedOption.getAttribute("data-fuel");
-      const year = parseInt(document.getElementById("regYear").value);
-      const ncb = parseFloat(document.getElementById("ncbSelect").value);
-      const regNo = document.getElementById("regNumber").value.trim().toUpperCase() || "NEW";
+    function onRegNumberChange(val) {
+      const cleanVal = val.toUpperCase().replace(/[^A-Z0-9]/g, '');
+      document.getElementById('reg-number-input').value = cleanVal;
+      state.registrationNumber = cleanVal;
 
-      // Calculate baseline IDV
-      const depRate = calculateDepreciation(year);
-      const baseIdv = Math.round(exShowroom * (1 - depRate));
+      // Extract State + RTO code prefix (e.g. UP14, DL01)
+      const prefix = cleanVal.slice(0, 4);
+      const rtoTag = document.getElementById('rto-detected-tag');
+      if (RTO_MAP[prefix]) {
+        rtoTag.innerText = `RTO: ${prefix} (${RTO_MAP[prefix].split(',')[0]})`;
+        rtoTag.className = 'text-[10px] font-mono font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded';
+      } else if (prefix.length >= 4) {
+        rtoTag.innerText = `RTO: ${prefix} (Zone B)`;
+        rtoTag.className = 'text-[10px] font-mono font-bold text-brand-700 bg-brand-50 border border-brand-200 px-2 py-0.5 rounded';
+      } else {
+        rtoTag.innerText = `Enter 10-char Reg No`;
+        rtoTag.className = 'text-[10px] font-mono text-slate-400 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded';
+      }
+
+      recalculateQuotes();
+    }
+
+    function populateMakes() {
+      const makeSelect = document.getElementById('vehicle-make');
+      makeSelect.innerHTML = '';
+      const makes = Object.keys(VEHICLES_DATABASE[state.category].makes);
+      makes.forEach(m => {
+        const opt = document.createElement('option');
+        opt.value = m;
+        opt.textContent = m;
+        makeSelect.appendChild(opt);
+      });
+      makeSelect.value = VEHICLES_DATABASE[state.category].defaultMake;
+    }
+
+    function onMakeChange() {
+      const make = document.getElementById('vehicle-make').value;
+      const modelSelect = document.getElementById('vehicle-model');
+      modelSelect.innerHTML = '';
+
+      const models = VEHICLES_DATABASE[state.category].makes[make] || [];
+      models.forEach((m, idx) => {
+        const opt = document.createElement('option');
+        opt.value = idx;
+        opt.textContent = m.name;
+        modelSelect.appendChild(opt);
+      });
+      modelSelect.value = 0;
+      onModelChange();
+    }
+
+    function onModelChange() {
+      const vehicle = getSelectedVehicle();
+      if (!vehicle) return;
+      document.getElementById('vehicle-fuel').value = vehicle.fuel;
+      updateIdvSchedule();
+      recalculateQuotes();
+    }
+
+    function onYearChange() {
+      updateIdvSchedule();
+      recalculateQuotes();
+    }
+
+    function getSelectedVehicle() {
+      const make = document.getElementById('vehicle-make').value;
+      const idx = parseInt(document.getElementById('vehicle-model').value, 10) || 0;
+      const list = VEHICLES_DATABASE[state.category].makes[make];
+      return list ? list[idx] : null;
+    }
+
+    function updateIdvSchedule() {
+      const vehicle = getSelectedVehicle();
+      if (!vehicle) return;
+
+      const regYear = parseInt(document.getElementById('vehicle-year').value, 10);
+      const currentYear = 2026;
+      const age = Math.max(0, currentYear - regYear);
+
+      // IRDAI Standard Depreciation Schedule
+      let depRatio = 0.05;
+      if (age >= 5) depRatio = 0.52;
+      else if (age >= 4) depRatio = 0.45;
+      else if (age >= 3) depRatio = 0.35;
+      else if (age >= 2) depRatio = 0.25;
+      else if (age >= 1) depRatio = 0.15;
+      else depRatio = 0.05;
+
+      const baseIdv = Math.round(vehicle.exShowroom * (1 - depRatio));
+      state.recommendedIdv = baseIdv;
+      state.currentIdv = baseIdv;
+
       const minIdv = Math.round(baseIdv * 0.80);
       const maxIdv = Math.round(baseIdv * 1.15);
 
-      const slider = document.getElementById("idvSlider");
+      const slider = document.getElementById('idv-slider');
       slider.min = minIdv;
       slider.max = maxIdv;
       slider.value = baseIdv;
 
-      selectedVehData = {
-        regNo,
-        modelName: selectedOption.text.split(" (")[0],
-        exShowroom,
-        cc,
-        fuel,
-        year,
-        ncb,
-        idv: baseIdv,
-        planType: document.querySelector('input[name="planType"]:checked').value
-      };
-
-      updateIdvUI(baseIdv, minIdv, maxIdv);
-      updateRtoBadge(regNo);
-      renderQuotes();
+      document.getElementById('idv-val-display').innerText = `₹${baseIdv.toLocaleString('en-IN')}`;
+      document.getElementById('idv-min-lbl').innerText = `Min: ₹${minIdv.toLocaleString('en-IN')}`;
+      document.getElementById('idv-max-lbl').innerText = `Max: ₹${maxIdv.toLocaleString('en-IN')}`;
     }
 
-    function updateIdvUI(val, min, max) {
-      document.getElementById("idvDisplay").innerText = "₹ " + Number(val).toLocaleString("en-IN");
-      document.getElementById("minIdvLabel").innerText = "Min: ₹ " + Number(min).toLocaleString("en-IN");
-      document.getElementById("maxIdvLabel").innerText = "Max: ₹ " + Number(max).toLocaleString("en-IN");
+    function onIdvChange(val) {
+      state.currentIdv = parseInt(val, 10);
+      document.getElementById('idv-val-display').innerText = `₹${state.currentIdv.toLocaleString('en-IN')}`;
+      recalculateQuotes();
     }
 
-    function updateRtoBadge(regNo) {
-      const rtoDisplay = document.getElementById("rtoDisplay");
-      if (regNo.length >= 2) {
-        const prefix = regNo.substring(0, 2).toUpperCase();
-        const stateMap = {
-          UP: "Uttar Pradesh",
-          DL: "Delhi NCT",
-          MH: "Maharashtra",
-          KA: "Karnataka",
-          HR: "Haryana",
-          TN: "Tamil Nadu",
-          TS: "Telangana",
-          GJ: "Gujarat",
-          WB: "West Bengal"
-        };
-        const st = stateMap[prefix] || "All India";
-        rtoDisplay.innerText = `${regNo.substring(0, 4)} (${st}), Zone A`;
+    function resetToRecommendedIdv() {
+      state.currentIdv = state.recommendedIdv;
+      document.getElementById('idv-slider').value = state.recommendedIdv;
+      document.getElementById('idv-val-display').innerText = `₹${state.recommendedIdv.toLocaleString('en-IN')}`;
+      showToast(`IDV set to recommended ₹${state.recommendedIdv.toLocaleString('en-IN')}`);
+      recalculateQuotes();
+    }
+
+    function setPolicyType(type) {
+      state.policyType = type;
+
+      const activeClass = 'p-2.5 text-left rounded-xl border border-brand-500 bg-brand-50/70 text-brand-900 transition shadow-xs';
+      const inactiveClass = 'p-2.5 text-left rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 transition';
+
+      document.getElementById('btn-comp').className = type === 'comprehensive' ? activeClass : inactiveClass;
+      document.getElementById('btn-tp').className = type === 'tp' ? activeClass : inactiveClass;
+      document.getElementById('btn-od').className = type === 'od' ? activeClass : inactiveClass;
+
+      const idvBox = document.getElementById('idv-box');
+      const ncbBox = document.getElementById('ncb-box');
+      const addonsBox = document.getElementById('addons-box');
+
+      if (type === 'tp') {
+        idvBox.classList.add('opacity-30', 'pointer-events-none');
+        ncbBox.classList.add('opacity-30', 'pointer-events-none');
+        addonsBox.classList.add('opacity-30', 'pointer-events-none');
       } else {
-        rtoDisplay.innerText = "All India RTO";
+        idvBox.classList.remove('opacity-30', 'pointer-events-none');
+        ncbBox.classList.remove('opacity-30', 'pointer-events-none');
+        addonsBox.classList.remove('opacity-30', 'pointer-events-none');
+      }
+
+      recalculateQuotes();
+    }
+
+    function toggleSelectAllAddons() {
+      const addonIds = ['addon-zerodep', 'addon-engine', 'addon-rsa', 'addon-rti', 'addon-consumables', 'addon-key'];
+      const allSelected = addonIds.every(id => document.getElementById(id).checked);
+      addonIds.forEach(id => {
+        document.getElementById(id).checked = !allSelected;
+      });
+      showToast(allSelected ? 'Cleared optional add-on riders' : 'All add-on riders enabled');
+      recalculateQuotes();
+    }
+
+    // Official IRDAI Statutory Motor Third Party Tariffs
+    function getStatutoryTpTariff(cc, fuel, category) {
+      if (category === 'bike') {
+        if (fuel === 'electric') return 620;
+        if (cc < 75) return 538;
+        if (cc <= 150) return 714;
+        if (cc <= 350) return 1366;
+        return 2804;
+      } else if (category === 'car') {
+        if (fuel === 'electric') return 1780;
+        if (cc < 1000) return 2094;
+        if (cc <= 1500) return 3416;
+        return 7890;
+      } else {
+        // Commercial goods carriage
+        return 11200;
       }
     }
 
-    // 5. Quote Calculation Formula
-    function computeQuote(insurer) {
-      const plan = selectedVehData.planType;
-      const idv = selectedVehData.idv;
-      const ncb = selectedVehData.ncb;
+    function recalculateQuotes() {
+      const vehicle = getSelectedVehicle();
+      if (!vehicle) return;
 
-      // Base Own Damage (OD)
-      let grossOd = Math.round(idv * insurer.baseOdMultiplier);
-      let ncbDiscount = Math.round(grossOd * ncb);
-      let netOd = grossOd - ncbDiscount;
+      const fuel = document.getElementById('vehicle-fuel').value;
+      const ncbPercent = parseInt(document.getElementById('ncb-select').value, 10);
+      const isComp = state.policyType === 'comprehensive';
+      const isTpOnly = state.policyType === 'tp';
+      const isOdOnly = state.policyType === 'od';
 
-      // Statutory Third-Party
-      let tp = getIRDAIThirdPartyTariff(selectedVehData.cc, selectedVehData.fuel);
+      document.getElementById('vehicle-hero-title').innerText = `${document.getElementById('vehicle-make').value} ${vehicle.name}`;
+      document.getElementById('ncb-discount-badge').innerText = `${ncbPercent}% OD Discount`;
 
-      // Addons
-      const hasZeroDep = document.getElementById("addonZeroDep").checked;
-      const hasEngine = document.getElementById("addonEngineProtect").checked;
-      const hasRSA = document.getElementById("addonRSA").checked;
-      const hasRTI = document.getElementById("addonRTI").checked;
-      const hasConsumables = document.getElementById("addonConsumables").checked;
-      const hasKey = document.getElementById("addonKey").checked;
-      const hasCPA = document.getElementById("addonCPA").checked;
+      // Checkbox states
+      const hasZeroDep = document.getElementById('addon-zerodep').checked;
+      const hasEngine = document.getElementById('addon-engine').checked;
+      const hasRsa = document.getElementById('addon-rsa').checked;
+      const hasRti = document.getElementById('addon-rti').checked;
+      const hasConsumables = document.getElementById('addon-consumables').checked;
+      const hasKey = document.getElementById('addon-key').checked;
+      const hasPa = document.getElementById('addon-pa').checked;
 
-      let zeroDepCost = hasZeroDep ? Math.round(idv * 0.0055) : 0;
-      let engineCost = hasEngine ? Math.round(idv * 0.0025) : 0;
-      let rsaCost = hasRSA ? 499 : 0;
-      let rtiCost = hasRTI ? Math.round(idv * 0.0035) : 0;
-      let consumablesCost = hasConsumables ? Math.round(idv * 0.0015) : 0;
-      let keyCost = hasKey ? 350 : 0;
-      let cpaCost = hasCPA ? 375 : 0; // CPA flat tariff
+      const tpStatutory = getStatutoryTpTariff(vehicle.cc, fuel, state.category);
 
-      let totalAddons = 0;
-      if (plan !== "tp_only") {
-        totalAddons = zeroDepCost + engineCost + rsaCost + rtiCost + consumablesCost + keyCost;
-      }
+      state.computedQuotes = INSURERS.map(ins => {
+        // 1. Own Damage
+        let odBase = 0;
+        let ncbAmount = 0;
+        let odNet = 0;
 
-      let subtotal = 0;
-      if (plan === "comprehensive") {
-        subtotal = netOd + tp + totalAddons + cpaCost;
-      } else if (plan === "tp_only") {
-        subtotal = tp + cpaCost;
-        netOd = 0;
-        grossOd = 0;
-        ncbDiscount = 0;
-        totalAddons = 0;
-      } else if (plan === "od_only") {
-        subtotal = netOd + totalAddons;
-        tp = 0;
-        cpaCost = 0;
-      }
+        if (!isTpOnly) {
+          odBase = Math.round(state.currentIdv * ins.odMultiplier);
+          ncbAmount = Math.round(odBase * (ncbPercent / 100));
+          odNet = odBase - ncbAmount;
+        }
 
-      let gst = Math.round(subtotal * 0.18);
-      let totalPayable = subtotal + gst;
+        // 2. Third Party
+        let finalTp = 0;
+        if (!isOdOnly) {
+          finalTp = tpStatutory;
+        }
 
-      return {
-        insurer,
-        grossOd,
-        ncbDiscount,
-        netOd,
-        tp,
-        addons: {
-          zeroDepCost,
-          engineCost,
-          rsaCost,
-          rtiCost,
-          consumablesCost,
-          keyCost,
-          cpaCost,
-          totalAddons
-        },
-        subtotal,
-        gst,
-        totalPayable
-      };
+        // 3. Add-ons
+        let addonsTotal = 0;
+        const addonList = {};
+
+        if (!isTpOnly) {
+          if (hasZeroDep) {
+            const zCost = Math.round(state.currentIdv * ins.zeroDepPct);
+            addonList['Zero Depreciation (Bumper to Bumper)'] = zCost;
+            addonsTotal += zCost;
+          }
+          if (hasEngine) {
+            addonList['Engine & Gearbox Protection'] = ins.engineProtectCost;
+            addonsTotal += ins.engineProtectCost;
+          }
+          if (hasRsa) {
+            addonList['24x7 Roadside Assistance'] = ins.rsaCost;
+            addonsTotal += ins.rsaCost;
+          }
+          if (hasRti) {
+            const rCost = Math.round(state.currentIdv * ins.rtiPct);
+            addonList['Return to Invoice (RTI)'] = rCost;
+            addonsTotal += rCost;
+          }
+          if (hasConsumables) {
+            addonList['Consumables Cover'] = ins.consumablesCost;
+            addonsTotal += ins.consumablesCost;
+          }
+          if (hasKey) {
+            addonList['Key Replacement & Locksmith'] = ins.keyCost;
+            addonsTotal += ins.keyCost;
+          }
+        }
+
+        if (hasPa) {
+          addonList['Compulsory PA Cover (₹15 Lakh)'] = 330;
+          addonsTotal += 330;
+        }
+
+        const subtotal = odNet + finalTp + addonsTotal;
+        const gst = Math.round(subtotal * 0.18);
+        const finalPayable = subtotal + gst;
+
+        return {
+          ...ins,
+          odBase,
+          ncbAmount,
+          odNet,
+          finalTp,
+          addonsTotal,
+          addonList,
+          subtotal,
+          gst,
+          finalPayable,
+          idv: state.currentIdv
+        };
+      });
+
+      renderQuoteCards();
     }
 
-    // 6. Direct Link Redirection Builder
-    function buildInsurerDirectUrl(insurer, quote) {
-      const reg = encodeURIComponent(selectedVehData.regNo);
-      const model = encodeURIComponent(selectedVehData.modelName);
-      const fuel = encodeURIComponent(selectedVehData.fuel);
-      const year = encodeURIComponent(selectedVehData.year);
-      const idv = encodeURIComponent(selectedVehData.idv);
+    function renderQuoteCards() {
+      const sortBy = document.getElementById('sort-dropdown').value;
 
-      // Deep query parameter forwarding
-      return `${insurer.websiteBaseUrl}?regNumber=${reg}&makeModel=${model}&fuelType=${fuel}&regYear=${year}&requestedIdv=${idv}&utm_source=bima_compare`;
-    }
+      const quotesCopy = [...state.computedQuotes].sort((a, b) => {
+        if (sortBy === 'price_asc') return a.finalPayable - b.finalPayable;
+        if (sortBy === 'price_desc') return b.finalPayable - a.finalPayable;
+        if (sortBy === 'csr_desc') return b.csr - a.csr;
+        if (sortBy === 'garages_desc') return b.garages - a.garages;
+        // recommended: CSR + Rating vs Cost
+        const valA = (a.rating * 15) + a.csr - (a.finalPayable / 800);
+        const valB = (b.rating * 15) + b.csr - (b.finalPayable / 800);
+        return valB - valA;
+      });
 
-    function initiateOutboundRedirect(insurerId) {
-      const insurer = INSURERS.find(i => i.id === insurerId);
-      if (!insurer) return;
+      const container = document.getElementById('quotes-feed');
+      container.innerHTML = '';
 
-      const directUrl = buildInsurerDirectUrl(insurer);
+      quotesCopy.forEach(q => {
+        const isCompared = state.selectedCompare.includes(q.id);
+        const card = document.createElement('div');
+        card.className = `bg-white rounded-2xl border transition-all duration-200 overflow-hidden ${
+          isCompared ? 'border-brand-600 shadow-md ring-1 ring-brand-600' : 'border-slate-200 hover:border-slate-300 shadow-xs'
+        }`;
 
-      // Show reassuring toast notification
-      const toast = document.getElementById("redirectToast");
-      const title = document.getElementById("toastTitle");
-      const desc = document.getElementById("toastDesc");
-
-      title.innerText = `Connecting to ${insurer.name}...`;
-      desc.innerText = `Forwarding registration (${selectedVehData.regNo}) & IDV (₹${Number(selectedVehData.idv).toLocaleString("en-IN")}) to official checkout.`;
-
-      toast.classList.remove("hidden");
-
-      setTimeout(() => {
-        // Open insurer's checkout page in new tab
-        window.open(directUrl, "_blank", "noopener,noreferrer");
-      }, 700);
-
-      setTimeout(() => {
-        toast.classList.add("hidden");
-      }, 4500);
-    }
-
-    // 7. Render Quote Cards
-    function renderQuotes() {
-      const container = document.getElementById("quotesContainer");
-      const sortBy = document.getElementById("sortBy").value;
-
-      let quotes = INSURERS.map(ins => computeQuote(ins));
-
-      // Sorting
-      if (sortBy === "premium_asc") {
-        quotes.sort((a, b) => a.totalPayable - b.totalPayable);
-      } else if (sortBy === "csr_desc") {
-        quotes.sort((a, b) => parseFloat(b.insurer.csr) - parseFloat(a.insurer.csr));
-      } else if (sortBy === "garages_desc") {
-        quotes.sort((a, b) => b.insurer.cashlessGarages - a.insurer.cashlessGarages);
-      }
-
-      container.innerHTML = quotes.map(q => {
-        const ins = q.insurer;
-        const isCompared = comparisonList.includes(ins.id);
-        const directUrl = buildInsurerDirectUrl(ins, q);
-
-        return `
-          <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-
-              <!-- Insurer Branding & Metrics -->
-              <div class="flex items-start space-x-3.5 flex-1">
-                <div class="h-11 w-11 rounded-xl ${ins.logoBadge} flex items-center justify-center text-white font-black text-base shadow-sm shrink-0">
-                  ${ins.shortName.substring(0, 2).toUpperCase()}
+        card.innerHTML = `
+          <div class="p-5">
+            <!-- Insurer Header & Price Highlight -->
+            <div class="flex flex-wrap items-start justify-between gap-3 pb-3 border-b border-slate-100">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center font-black text-sm border shadow-xs ${q.logoBg}">
+                  ${q.logoText}
                 </div>
                 <div>
-                  <div class="flex items-center space-x-2">
-                    <h3 class="font-bold text-slate-900 text-sm sm:text-base">${ins.name}</h3>
-                    <span class="inline-flex items-center text-[10px] font-semibold bg-emerald-50 text-emerald-700 px-1.5 py-0.5 rounded">
-                      <i class="fa-solid fa-star text-[9px] text-amber-500 mr-1"></i> ${ins.rating}
+                  <div class="flex items-center gap-2">
+                    <h3 class="font-extrabold text-slate-900 text-base leading-tight">${q.name}</h3>
+                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full border ${q.badgeClass}">
+                      ${q.badge}
                     </span>
                   </div>
-
-                  <div class="flex flex-wrap items-center gap-y-1 gap-x-3 mt-1.5 text-xs text-slate-500">
-                    <span title="Claim Settlement Ratio"><i class="fa-solid fa-award text-indigo-500 mr-1"></i><strong>${ins.csr}</strong> CSR</span>
-                    <span>•</span>
-                    <span title="Cashless Network"><i class="fa-solid fa-wrench text-slate-400 mr-1"></i>${ins.cashlessGarages.toLocaleString()}+ Garages</span>
-                    <span>•</span>
-                    <span class="text-slate-600"><i class="fa-solid fa-clock text-slate-400 mr-1"></i>${ins.tat}</span>
-                  </div>
-
-                  <div class="flex flex-wrap gap-1.5 mt-2.5">
-                    ${ins.features.map(f => `<span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">${f}</span>`).join("")}
+                  <div class="flex items-center gap-2 text-xs text-slate-500 mt-1">
+                    <span class="inline-flex items-center font-bold text-amber-500">
+                      ★ ${q.rating}
+                    </span>
+                    <span>(${q.reviewsCount} reviews)</span>
+                    <span class="text-slate-300">•</span>
+                    <span class="text-slate-600 font-medium">Claim TAT: ~${q.tatHours} hrs</span>
                   </div>
                 </div>
               </div>
 
-              <!-- Price & Outbound CTA -->
-              <div class="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center border-t md:border-t-0 pt-3 md:pt-0 border-slate-100 shrink-0">
-                <div class="text-left md:text-right">
-                  <div class="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">Total Inc. 18% GST</div>
-                  <div class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">₹ ${q.totalPayable.toLocaleString("en-IN")}</div>
-                  <button onclick="openInvoiceModal('${ins.id}')" class="text-[11px] font-semibold text-indigo-600 hover:text-indigo-800 underline">
-                    View Premium Breakdown
-                  </button>
-                </div>
-
-                <div class="flex items-center space-x-2 mt-2">
-                  <label class="flex items-center space-x-1.5 text-xs text-slate-500 cursor-pointer hover:text-slate-700">
-                    <input type="checkbox" onchange="toggleCompare('${ins.id}')" ${isCompared ? 'checked' : ''} class="rounded text-indigo-600 focus:ring-indigo-500 h-3.5 w-3.5" />
-                    <span>Compare</span>
-                  </label>
-
-                  <!-- Direct Redirect CTA -->
-                  <button onclick="initiateOutboundRedirect('${ins.id}')" class="bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white text-xs font-bold px-4 py-2 rounded-lg shadow-md shadow-indigo-100 flex items-center space-x-1.5 transition">
-                    <span>Buy on ${ins.shortName}</span>
-                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                  </button>
-                </div>
+              <!-- Price Box with Line-item trigger -->
+              <div class="text-right sm:ml-auto">
+                <div class="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Total (inc. 18% GST)</div>
+                <div class="text-2xl font-black font-mono text-slate-900 tracking-tight">₹${q.finalPayable.toLocaleString('en-IN')}</div>
+                <button onclick="openBreakupModal('${q.id}')" class="text-[11px] font-semibold text-brand-600 hover:text-brand-800 underline transition">
+                  View Breakup
+                </button>
               </div>
+            </div>
 
+            <!-- Key Metric Indicators -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 py-3 my-2 text-xs bg-slate-50 rounded-xl px-3 border border-slate-100 font-mono">
+              <div>
+                <span class="text-[10px] font-sans text-slate-400 block font-medium">Settlement (CSR)</span>
+                <span class="font-bold text-emerald-700 flex items-center gap-1 font-mono">
+                  <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  ${q.csr}%
+                </span>
+              </div>
+              <div>
+                <span class="text-[10px] font-sans text-slate-400 block font-medium">Cashless Garages</span>
+                <span class="font-bold text-slate-800 font-mono">${q.garages.toLocaleString('en-IN')}+</span>
+              </div>
+              <div>
+                <span class="text-[10px] font-sans text-slate-400 block font-medium">Insured Value (IDV)</span>
+                <span class="font-bold text-slate-800 font-mono">₹${q.idv.toLocaleString('en-IN')}</span>
+              </div>
+              <div>
+                <span class="text-[10px] font-sans text-slate-400 block font-medium">NCB Saved</span>
+                <span class="font-bold text-emerald-600 font-mono">₹${q.ncbAmount.toLocaleString('en-IN')}</span>
+              </div>
+            </div>
+
+            <!-- Highlights / Perks -->
+            <div class="flex flex-wrap items-center gap-2 mb-4">
+              ${q.perks.map(p => `
+                <span class="inline-flex items-center text-[10px] font-medium bg-slate-100 text-slate-700 px-2 py-0.5 rounded-md border border-slate-200">
+                  <svg class="w-3 h-3 text-emerald-500 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                  ${p}
+                </span>
+              `).join('')}
+            </div>
+
+            <!-- Bottom Row: Comparison Checkbox & Direct Buy CTA -->
+            <div class="flex items-center justify-between gap-3 pt-1">
+              <label class="inline-flex items-center gap-2 text-xs font-semibold text-slate-600 cursor-pointer select-none">
+                <input type="checkbox" onchange="toggleCompare('${q.id}')" ${isCompared ? 'checked' : ''} class="w-4 h-4 rounded text-brand-600 focus:ring-brand-500 border-slate-300">
+                <span>Compare</span>
+              </label>
+
+              <div class="flex items-center gap-2">
+                <button onclick="openBreakupModal('${q.id}')" class="px-3 py-2 text-xs font-semibold text-slate-700 hover:text-slate-900 border border-slate-200 rounded-xl hover:bg-slate-50 transition">
+                  Breakup
+                </button>
+                <button onclick="prepareOutboundRedirect('${q.id}')" class="px-4 sm:px-5 py-2 text-xs font-bold text-white bg-brand-600 hover:bg-brand-700 rounded-xl transition shadow-md shadow-brand-500/20 flex items-center gap-1.5">
+                  <span>Buy on ${q.name}</span>
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                </button>
+              </div>
             </div>
           </div>
         `;
-      }).join("");
+        container.appendChild(card);
+      });
+
+      updateCompareBadge();
     }
 
-    // 8. Tax Breakdown Invoice Modal
-    function openInvoiceModal(insurerId) {
-      const insurer = INSURERS.find(i => i.id === insurerId);
-      const q = computeQuote(insurer);
+    function toggleCompare(id) {
+      if (state.selectedCompare.includes(id)) {
+        state.selectedCompare = state.selectedCompare.filter(item => item !== id);
+      } else {
+        if (state.selectedCompare.length >= 3) {
+          showToast('You can compare a maximum of 3 insurers side-by-side', true);
+          renderQuoteCards();
+          return;
+        }
+        state.selectedCompare.push(id);
+      }
+      updateCompareBadge();
+      renderQuoteCards();
+    }
 
-      document.getElementById("invInsurerName").innerText = insurer.name;
-      document.getElementById("invTotalAmount").innerText = "₹ " + q.totalPayable.toLocaleString("en-IN");
+    function updateCompareBadge() {
+      const badge = document.getElementById('compare-count-tag');
+      if (badge) {
+        badge.innerText = `${state.selectedCompare.length}/3`;
+      }
+    }
 
-      const invBuyBtn = document.getElementById("invBuyBtn");
-      invBuyBtn.onclick = () => {
-        closeInvoiceModal();
-        initiateOutboundRedirect(insurer.id);
-      };
+    function openSideBySideModal() {
+      if (state.selectedCompare.length === 0) {
+        showToast('Please check at least 1 insurer card to compare', true);
+        return;
+      }
 
-      let html = `
-        <div class="bg-slate-50 p-3 rounded-lg space-y-1.5">
-          <div class="flex justify-between font-bold text-slate-700">
-            <span>A. Own Damage (OD) Component</span>
-            <span>₹ ${q.netOd.toLocaleString("en-IN")}</span>
-          </div>
-          <div class="flex justify-between text-slate-500 pl-3">
-            <span>Basic OD Premium</span>
-            <span>₹ ${q.grossOd.toLocaleString("en-IN")}</span>
-          </div>
-          <div class="flex justify-between text-emerald-600 pl-3">
-            <span>NCB Discount (${selectedVehData.ncb * 100}%)</span>
-            <span>- ₹ ${q.ncbDiscount.toLocaleString("en-IN")}</span>
-          </div>
-        </div>
+      const modal = document.getElementById('side-by-side-modal');
+      const container = document.getElementById('comparison-table-container');
+      const selectedQuotes = state.computedQuotes.filter(q => state.selectedCompare.includes(q.id));
 
-        <div class="bg-slate-50 p-3 rounded-lg space-y-1.5">
-          <div class="flex justify-between font-bold text-slate-700">
-            <span>B. Statutory Third-Party (TP) Tariff</span>
-            <span>₹ ${q.tp.toLocaleString("en-IN")}</span>
-          </div>
-          <div class="flex justify-between text-slate-500 pl-3">
-            <span>Mandatory IRDAI Third-Party Liability</span>
-            <span>₹ ${q.tp.toLocaleString("en-IN")}</span>
-          </div>
-        </div>
-
-        <div class="bg-slate-50 p-3 rounded-lg space-y-1.5">
-          <div class="flex justify-between font-bold text-slate-700">
-            <span>C. Add-on Riders & CPA</span>
-            <span>₹ ${(q.addons.totalAddons + q.addons.cpaCost).toLocaleString("en-IN")}</span>
-          </div>
-          ${q.addons.zeroDepCost ? `<div class="flex justify-between text-slate-500 pl-3"><span>Zero Depreciation Cover</span><span>₹ ${q.addons.zeroDepCost.toLocaleString("en-IN")}</span></div>` : ''}
-          ${q.addons.engineCost ? `<div class="flex justify-between text-slate-500 pl-3"><span>Engine & Gearbox Protection</span><span>₹ ${q.addons.engineCost.toLocaleString("en-IN")}</span></div>` : ''}
-          ${q.addons.rsaCost ? `<div class="flex justify-between text-slate-500 pl-3"><span>24x7 Roadside Assistance (RSA)</span><span>₹ ${q.addons.rsaCost.toLocaleString("en-IN")}</span></div>` : ''}
-          ${q.addons.rtiCost ? `<div class="flex justify-between text-slate-500 pl-3"><span>Return to Invoice (RTI)</span><span>₹ ${q.addons.rtiCost.toLocaleString("en-IN")}</span></div>` : ''}
-          ${q.addons.consumablesCost ? `<div class="flex justify-between text-slate-500 pl-3"><span>Consumables Cover</span><span>₹ ${q.addons.consumablesCost.toLocaleString("en-IN")}</span></div>` : ''}
-          ${q.addons.keyCost ? `<div class="flex justify-between text-slate-500 pl-3"><span>Key Replacement Cover</span><span>₹ ${q.addons.keyCost.toLocaleString("en-IN")}</span></div>` : ''}
-          ${q.addons.cpaCost ? `<div class="flex justify-between text-slate-500 pl-3"><span>Compulsory Owner-Driver PA (₹15 Lakh)</span><span>₹ ${q.addons.cpaCost.toLocaleString("en-IN")}</span></div>` : ''}
-        </div>
-
-        <div class="pt-2 border-t border-slate-200 space-y-1.5 font-medium">
-          <div class="flex justify-between text-slate-600">
-            <span>Net Premium Subtotal</span>
-            <span>₹ ${q.subtotal.toLocaleString("en-IN")}</span>
-          </div>
-          <div class="flex justify-between text-slate-600">
-            <span>Goods & Services Tax (18% GST)</span>
-            <span>₹ ${q.gst.toLocaleString("en-IN")}</span>
-          </div>
-          <div class="flex justify-between text-[11px] text-slate-400 pl-3">
-            <span>Central GST (CGST 9%)</span>
-            <span>₹ ${(q.gst / 2).toLocaleString("en-IN")}</span>
-          </div>
-          <div class="flex justify-between text-[11px] text-slate-400 pl-3">
-            <span>State GST (SGST 9%)</span>
-            <span>₹ ${(q.gst / 2).toLocaleString("en-IN")}</span>
-          </div>
-        </div>
+      let tableHtml = `
+        <table class="w-full text-left border-collapse min-w-[620px]">
+          <thead>
+            <tr class="border-b border-slate-200">
+              <th class="p-3 bg-slate-50 text-xs font-bold text-slate-500 w-1/4">Key Benchmark Metric</th>
+              ${selectedQuotes.map(q => `
+                <th class="p-3 bg-slate-50 text-xs font-bold text-slate-900 text-center">
+                  <div class="font-extrabold text-sm">${q.name}</div>
+                  <div class="text-xs text-brand-600 font-mono mt-0.5">₹${q.finalPayable.toLocaleString('en-IN')}</div>
+                </th>
+              `).join('')}
+            </tr>
+          </thead>
+          <tbody class="text-xs divide-y divide-slate-100">
+            <tr>
+              <td class="p-3 font-semibold text-slate-600">Claim Settlement Ratio (CSR)</td>
+              ${selectedQuotes.map(q => `
+                <td class="p-3 text-center font-bold text-emerald-600 font-mono">${q.csr}% (IRDAI Verified)</td>
+              `).join('')}
+            </tr>
+            <tr>
+              <td class="p-3 font-semibold text-slate-600">Network Cashless Garages</td>
+              ${selectedQuotes.map(q => `
+                <td class="p-3 text-center font-bold text-slate-800 font-mono">${q.garages.toLocaleString('en-IN')}+ centers</td>
+              `).join('')}
+            </tr>
+            <tr>
+              <td class="p-3 font-semibold text-slate-600">Average Claim Processing TAT</td>
+              ${selectedQuotes.map(q => `
+                <td class="p-3 text-center text-slate-700 font-mono">${q.tatHours} hours</td>
+              `).join('')}
+            </tr>
+            <tr>
+              <td class="p-3 font-semibold text-slate-600">Base Own Damage (OD)</td>
+              ${selectedQuotes.map(q => `
+                <td class="p-3 text-center font-mono">₹${q.odBase.toLocaleString('en-IN')}</td>
+              `).join('')}
+            </tr>
+            <tr>
+              <td class="p-3 font-semibold text-slate-600">NCB Discount Deducted</td>
+              ${selectedQuotes.map(q => `
+                <td class="p-3 text-center font-mono text-emerald-600">-₹${q.ncbAmount.toLocaleString('en-IN')}</td>
+              `).join('')}
+            </tr>
+            <tr>
+              <td class="p-3 font-semibold text-slate-600">Statutory Third-Party Tariff</td>
+              ${selectedQuotes.map(q => `
+                <td class="p-3 text-center font-mono">₹${q.finalTp.toLocaleString('en-IN')}</td>
+              `).join('')}
+            </tr>
+            <tr>
+              <td class="p-3 font-semibold text-slate-600">Add-ons & Riders Subtotal</td>
+              ${selectedQuotes.map(q => `
+                <td class="p-3 text-center font-mono">₹${q.addonsTotal.toLocaleString('en-IN')}</td>
+              `).join('')}
+            </tr>
+            <tr>
+              <td class="p-3 font-semibold text-slate-600">Goods & Services Tax (18% GST)</td>
+              ${selectedQuotes.map(q => `
+                <td class="p-3 text-center font-mono text-amber-700">₹${q.gst.toLocaleString('en-IN')}</td>
+              `).join('')}
+            </tr>
+            <tr class="bg-brand-50/60 font-bold">
+              <td class="p-3 text-slate-900">Total Final Payable</td>
+              ${selectedQuotes.map(q => `
+                <td class="p-3 text-center font-black font-mono text-brand-700 text-sm">₹${q.finalPayable.toLocaleString('en-IN')}</td>
+              `).join('')}
+            </tr>
+            <tr>
+              <td class="p-3 font-semibold text-slate-600">Direct Purchase Link</td>
+              ${selectedQuotes.map(q => `
+                <td class="p-3 text-center">
+                  <button onclick="closeSideBySideModal(); prepareOutboundRedirect('${q.id}')" class="px-3.5 py-1.5 bg-brand-600 text-white rounded-lg text-xs font-bold hover:bg-brand-700 transition inline-flex items-center gap-1 shadow-xs">
+                    <span>Visit ${q.name}</span>
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                  </button>
+                </td>
+              `).join('')}
+            </tr>
+          </tbody>
+        </table>
       `;
 
-      document.getElementById("invoiceDetails").innerHTML = html;
-      const modal = document.getElementById("invoiceModal");
-      modal.classList.remove("hidden");
-      modal.classList.add("flex");
+      container.innerHTML = tableHtml;
+      modal.classList.remove('hidden');
     }
 
-    function closeInvoiceModal() {
-      const modal = document.getElementById("invoiceModalHere is the complete, standalone **`index.html`** file. You can save it directly as `index.html` and open it in any web browser or host it on platforms like GitHub Pages, Vercel, or Netlify.
+    function closeSideBySideModal() {
+      document.getElementById('side-by-side-modal').classList.add('hidden');
+    }
 
-It includes:
-- **Vehicle lookup & RTO parsing** (auto-detects RTO from Indian number plates like `UP14...`, `DL01...`, `MH02...`, etc.).
-- **Official IRDAI-based tariff logic** (fixed statutory Third-Party rates by CC/fuel type, standard depreciation schedule for IDV bounds, and NCB tiers from 0% to 50%).
-- **Top 7 Indian Motor Insurers**: HDFC ERGO, ICICI Lombard, Tata AIG, Bajaj Allianz, Digit, SBI General, and Reliance General.
-- **Interactive Add-ons**: Zero Dep, Engine Protection, Roadside Assistance (RSA), Return to Invoice (RTI), Consumables, Key Cover, and ₹15L CPA Cover.
-- **Direct Redirection to Official Insurers**: Passes pre-fill query parameters (Registration No, RTO, vehicle details) directly to each insurer's motor insurance portal in a new tab with an outbound confirmation dialog.
-- **Side-by-side comparison drawer** and **line-item GST tax invoice modals**.
+    function openBreakupModal(id) {
+      state.modalQuoteId = id;
+      const quote = state.computedQuotes.find(q => q.id === id);
+      if (!quote) return;
 
----
+      const vehicle = getSelectedVehicle();
 
-### `index.html`
+      document.getElementById('breakup-title').innerText = `${quote.fullName}`;
+      document.getElementById('breakup-sub').innerText = `${document.getElementById('vehicle-make').value} ${vehicle.name} • Reg: ${state.registrationNumber} • IDV: ₹${quote.idv.toLocaleString('en-IN')}`;
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BimaCompare - Motor Insurance Comparison</title>
-  <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
-  <link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)" />
-  <link href="[https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap](https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap)" rel="stylesheet" />
-  <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
-    .badge-soft-green { background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; }
-    .badge-soft-blue { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
-    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
-    .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
-  </style>
-</head>
-<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
+      const logo = document.getElementById('breakup-logo');
+      logo.className = `w-10 h-10 rounded-xl flex items-center justify-center font-bold text-xs border ${quote.logoBg}`;
+      logo.innerText = quote.logoText;
 
-  <!-- TOP NAVBAR -->
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <div class="flex items-center space-x-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
-          <i class="fa-solid fa-shield-halved text-xl"></i>
-        </div>
-        <div>
-          <span class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-blue-700 to-indigo-600 bg-clip-text text-transparent">BimaCompare</span>
-          <span class="text-[10px] block font-semibold text-slate-400 tracking-wider uppercase -mt-1">India Motor Insurance</span>
-        </div>
-      </div>
-      <div class="flex items-center gap-3">
-        <span class="hidden md:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-          <i class="fa-solid fa-circle-check text-emerald-500"></i> Direct Insurer Redirection
-        </span>
-        <span class="text-xs text-slate-500 font-medium hidden sm:block">IRDAI Aligned Tariff Logic</span>
-      </div>
-    </div>
-  </header>
+      document.getElementById('inv-od-base').innerText = `₹${quote.odBase.toLocaleString('en-IN')}`;
+      document.getElementById('inv-od-rate').innerText = `Base factor: ${(quote.odMultiplier * 100).toFixed(2)}% of IDV`;
 
-  <!-- MAIN CONTAINER -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
-    
-    <!-- HERO / TITLE -->
-    <div class="mb-8 text-center max-w-2xl mx-auto">
-      <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Compare Top Motor Insurance Policies</h1>
-      <p class="text-sm text-slate-500 mt-2">Accurate IRDAI statutory Third-Party calculations, transparent Own Damage estimates, and instant redirection to official company portals.</p>
-    </div>
+      const ncbPct = document.getElementById('ncb-select').value;
+      document.getElementById('inv-ncb-title').innerText = `Less: No Claim Bonus (NCB ${ncbPct}%)`;
+      document.getElementById('inv-ncb-amt').innerText = `- ₹${quote.ncbAmount.toLocaleString('en-IN')}`;
+      document.getElementById('inv-od-net').innerText = `₹${quote.odNet.toLocaleString('en-IN')}`;
 
-    <!-- VEHICLE CONFIG PANEL -->
-    <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 sm:p-6 mb-8">
-      <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-5">
-        <h2 class="text-base font-bold text-slate-800 flex items-center gap-2">
-          <i class="fa-solid fa-car-side text-blue-600"></i> Vehicle & Policy Details
-        </h2>
-        
-        <!-- Vehicle Type Selector -->
-        <div class="flex items-center bg-slate-100 p-1 rounded-xl text-xs font-semibold text-slate-600" id="vehicleTypeTabs">
-          <button class="px-3.5 py-1.5 rounded-lg bg-white text-blue-700 shadow-sm transition" data-type="car" onclick="setVehicleType('car')">
-            <i class="fa-solid fa-car mr-1"></i> Private Car
-          </button>
-          <button class="px-3.5 py-1.5 rounded-lg hover:text-slate-900 transition" data-type="bike" onclick="setVehicleType('bike')">
-            <i class="fa-solid fa-motorcycle mr-1"></i> Two Wheeler
-          </button>
-          <button class="px-3.5 py-1.5 rounded-lg hover:text-slate-900 transition" data-type="commercial" onclick="setVehicleType('commercial')">
-            <i class="fa-solid fa-truck-pickup mr-1"></i> Commercial
-          </button>
-        </div>
-      </div>
+      document.getElementById('inv-tp-amt').innerText = `₹${quote.finalTp.toLocaleString('en-IN')}`;
+      document.getElementById('inv-addons-sum').innerText = `₹${quote.addonsTotal.toLocaleString('en-IN')}`;
 
-      <!-- Controls Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        
-        <!-- Registration Input with RTO Parser -->
-        <div>
-          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Vehicle Number</label>
-          <div class="relative">
-            <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400 font-bold text-xs">IND</span>
-            <input type="text" id="regNoInput" value="UP14AB1234" maxlength="10" placeholder="e.g. MH02DW4000"
-              class="w-full pl-12 pr-3 py-2.5 rounded-xl border border-slate-300 text-sm font-semibold tracking-wider uppercase focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition"
-              oninput="handleRegChange(this.value)" />
-          </div>
-          <div id="rtoBadge" class="mt-1.5 text-[11px] text-slate-500 font-medium flex items-center gap-1">
-            <i class="fa-solid fa-location-dot text-blue-500"></i> <span id="rtoLabel">Ghaziabad, Uttar Pradesh (Zone B)</span>
-          </div>
-        </div>
+      const addonsBox = document.getElementById('inv-addons-items');
+      addonsBox.innerHTML = '';
+      const items = Object.entries(quote.addonList);
+      if (items.length === 0) {
+        addonsBox.innerHTML = `<span class="text-slate-400 italic">No add-on riders chosen</span>`;
+      } else {
+        items.forEach(([name, cost]) => {
+          const row = document.createElement('div');
+          row.className = 'flex justify-between items-center';
+          row.innerHTML = `<span>• ${name}</span><span class="font-mono text-slate-800">₹${cost.toLocaleString('en-IN')}</span>`;
+          addonsBox.appendChild(row);
+        });
+      }
 
-        <!-- Vehicle Model -->
-        <div>
-          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Make & Model</label>
-          <select id="vehicleModelSelect" onchange="handleModelChange()"
-            class="w-full py-2.5 px-3 rounded-xl border border-slate-300 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent bg-white">
-            <!-- populated by JS -->
-          </select>
-          <div class="mt-1.5 text-[11px] text-slate-400" id="engineSpecLabel">1197 cc | Petrol</div>
-        </div>
+      document.getElementById('inv-subtotal').innerText = `₹${quote.subtotal.toLocaleString('en-IN')}`;
+      document.getElementById('inv-gst').innerText = `₹${quote.gst.toLocaleString('en-IN')}`;
+      document.getElementById('inv-total').innerText = `₹${quote.finalPayable.toLocaleString('en-IN')}`;
 
-        <!-- Registration Year -->
-        <div>
-          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Reg. Year & Depreciation</label>
-          <select id="regYearSelect" onchange="calculateTariffs()"
-            class="w-full py-2.5 px-3 rounded-xl border border-slate-300 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent bg-white">
-            <option value="2026">2026 (Brand New - 5% Dep)</option>
-            <option value="2025">2025 (Up to 1 yr - 15% Dep)</option>
-            <option value="2024">2024 (Up to 2 yrs - 20% Dep)</option>
-            <option value="2023" selected>2023 (Up to 3 yrs - 30% Dep)</option>
-            <option value="2022">2022 (Up to 4 yrs - 40% Dep)</option>
-            <option value="2021">2021 (Up to 5 yrs - 50% Dep)</option>
-            <option value="2019">2019 (> 5 yrs - 50%+ Dep)</option>
-          </select>
-        </div>
+      document.getElementById('breakup-modal').classList.remove('hidden');
+    }
 
-        <!-- Policy Type & NCB -->
-        <div>
-          <div class="flex justify-between items-center mb-1.5">
-            <label class="text-xs font-bold text-slate-700 uppercase tracking-wider">NCB Discount</label>
-            <span class="text-[11px] font-semibold text-blue-600" id="ncbDisplay">25%</span>
-          </div>
-          <select id="ncbSelect" onchange="calculateTariffs()"
-            class="w-full py-2.5 px-3 rounded-xl border border-slate-300 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent bg-white">
-            <option value="0">0% (No previous NCB / Claim made)</option>
-            <option value="0.20">20% (1 claim-free year)</option>
-            <option value="0.25" selected>25% (2 claim-free years)</option>
-            <option value="0.35">35% (3 claim-free years)</option>
-            <option value="0.45">45% (4 claim-free years)</option>
-            <option value="0.50">50% (5+ claim-free years - Max)</option>
-          </select>
-        </div>
+    function closeBreakupModal() {
+      document.getElementById('breakup-modal').classList.add('hidden');
+    }
 
-      </div>
+    function directRedirectFromModal() {
+      closeBreakupModal();
+      if (state.modalQuoteId) {
+        prepareOutboundRedirect(state.modalQuoteId);
+      }
+    }
 
-      <!-- IDV Adjuster Banner -->
-      <div class="mt-5 pt-4 border-t border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-50 p-4 rounded-xl">
-        <div class="flex-1">
-          <div class="flex items-center justify-between mb-1">
-            <span class="text-xs font-bold uppercase tracking-wider text-slate-600">Insured Declared Value (IDV)</span>
-            <span class="text-sm font-extrabold text-blue-700" id="idvValueText">₹ 5,80,000</span>
-          </div>
-          <input type="range" id="idvSlider" class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600" oninput="updateIDVSlider(this.value)" />
-          <div class="flex justify-between text-[10px] text-slate-400 mt-1">
-            <span id="idvMinText">Min: ₹4,50,000</span>
-            <span id="idvRecText">IRDAI Recommended: ₹5,80,000</span>
-            <span id="idvMaxText">Max: ₹6,50,000</span>
-          </div>
-        </div>
-        <div class="flex items-center gap-3">
-          <button onclick="resetRecommendedIDV()" class="px-3 py-1.5 text-xs font-semibold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-lg transition whitespace-nowrap">
-            <i class="fa-solid fa-arrows-rotate mr-1"></i> Reset Recommended
-          </button>
-        </div>
-      </div>
-    </section>
+    function buildInsurerDeepLink(quote) {
+      const reg = encodeURIComponent(state.registrationNumber);
+      const make = encodeURIComponent(document.getElementById('vehicle-make').value);
+      const model = encodeURIComponent(getSelectedVehicle() ? getSelectedVehicle().name : '');
+      const year = encodeURIComponent(document.getElementById('vehicle-year').value);
+      const fuel = encodeURIComponent(document.getElementById('vehicle-fuel').value);
 
-    <!-- ADD-ON COVERS SELECTOR -->
-    <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 mb-8">
-      <div class="flex items-center justify-between mb-3">
-        <h3 class="text-sm font-bold text-slate-800 flex items-center gap-2">
-          <i class="fa-solid fa-plus-circle text-indigo-600"></i> Recommended Add-on Riders
-        </h3>
-        <span class="text-xs text-slate-400">Customizes Own Damage coverage</span>
-      </div>
-      
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+      // Build target outbound link passing parameters where supported by insurer landing pages
+      switch(quote.id) {
+        case 'hdfc_ergo':
+          return `https://www.hdfcergo.com/car-insurance?regNo=${reg}&make=${make}&model=${model}&fuel=${fuel}&regYear=${year}&utm_source=direct_compare`;
+        case 'icici_lombard':
+          return `https://www.icicilombard.com/motor-insurance/car-insurance?regNo=${reg}&utm_source=direct_compare`;
+        case 'tata_aig':
+          return `https://www.tataaig.com/car-insurance?registrationNumber=${reg}&utm_source=direct_compare`;
+        case 'bajaj_allianz':
+          return `https://www.bajajallianz.com/motor-insurance/car-insurance.html?regNo=${reg}&utm_source=direct_compare`;
+        case 'go_digit':
+          return `https://www.godigit.com/motor-insurance/car-insurance?registrationNo=${reg}&make=${make}&utm_source=direct_compare`;
+        case 'sbi_general':
+          return `https://www.sbigeneral.in/portal/motor-insurance/car-insurance?regNo=${reg}&utm_source=direct_compare`;
+        case 'reliance_general':
+          return `https://www.reliancegeneral.co.in/Insurance/Motor-Insurance/Car-Insurance.aspx?regNo=${reg}&utm_source=direct_compare`;
+        default:
+          return quote.portalUrl;
+      }
+    }
+
+    function prepareOutboundRedirect(id) {
+      const quote = state.computedQuotes.find(q => q.id === id);
+      if (!quote) return;
+
+      const fullUrl = buildInsurerDeepLink(quote);
+      state.pendingRedirectUrl = fullUrl;
+
+      document.getElementById('redirect-insurer-name').innerText = quote.name;
+      document.getElementById('redirect-reg-no').innerText = state.registrationNumber || 'NOT SPECIFIED';
+      document.getElementById('redirect-target-url').innerText = quote.portalUrl;
+      document.getElementById('redirect-target-url').title = fullUrl;
+
+      document.getElementById('redirect-modal').classList.remove('hidden');
+
+      // Auto redirect after 1.8 seconds if user doesn't abort
+      state.redirectTimeout = setTimeout(() => {
+        executePendingRedirect();
+      }, 1800);
+    }
+
+    function executePendingRedirect() {
+      if (state.redirectTimeout) {
+        clearTimeout(state.redirectTimeout);
+      }
+      document.getElementById('redirect-modal').classList.add('hidden');
+      if (state.pendingRedirectUrl) {
+        // Open insurer landing page directly in a new secure window
+        window.open(state.pendingRedirectUrl, '_blank', 'noopener,noreferrer');
+        showToast('Opened insurer direct portal in a new tab.');
+      }
+    }
+
+    function abortRedirect() {
+      if (state.redirectTimeout) {
+        clearTimeout(state.redirectTimeout);
+      }
+      document.getElementById('redirect-modal').classList.add('hidden');
+      state.pendingRedirectUrl = null;
+      showToast('Redirection canceled');
+    }
+
+    // Modal Helpers
+    function showIdvExplainModal() {
+      document.getElementById('idv-modal').classList.remove('hidden');
+    }
+
+    function openFaqModal() {
+      document.getElementById('faq-modal').classList.remove('hidden');
+    }
+
+    function resetDefaults() {
+      setVehicleCategory('car');
+      document.getElementById('reg-number-input').value = 'UP14AB1234';
+      onRegNumberChange('UP14AB1234');
+      document.getElementById('vehicle-year').value = '2024';
+      document.getElementById('ncb-select').value = '25';
+      document.getElementById('sort-dropdown').value = 'recommended';
+      setPolicyType('comprehensive');
+      showToast('Settings reset to standard defaults');
+    }
+
+    function showToast(message, isWarning = false) {
+      const toast = document.getElementById('toast');
+      const text = document.getElementById('toast-message');
+      const icon = document.getElementById('toast-icon');
+
+      text.innerText = message;
+      icon.innerText = isWarning ? '!' : '✓';
+      toast.className = `fixed bottom-5 right-5 text-white text-xs px-4 py-3 rounded-xl shadow-2xl z-50 flex items-center gap-2 transition-all duration-300 transform translate-y-0 opacity-100 ${
+        isWarning ? 'bg-amber-600' : 'bg-slate-900'
+      }`;
+
+      setTimeout(() => {
+        toast.className = 'fixed bottom-5 right-5 bg-slate-900 text-white text-xs px-4 py-3 rounded-xl shadow-2xl z-50 flex items-center gap-2 transform translate-y-24 opacity-0 transition-all duration-300';
+      }, 3200);
+    }
+  </script>
+</body>
+</html>
